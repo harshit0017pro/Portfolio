@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio - Dreamlike retro-futuristic developer portfolio">
+    <meta property="og:title" content="Portfolio - Developer">
+    <meta property="og:description" content="Dreamlike retro-futuristic portfolio">
+    <meta property="og:type" content="website">
+    <title>Portfolio - Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React, ReactDOM, Framer Motion -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.js"></script>
+    
+    <!-- Babel Standalone for JSX/TSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tubes Cursor Library -->
+    <script type="module">
+        import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
+        window.TubesCursor = TubesCursor;
+    </script>
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        space: {
+                            900: '#000000',
+                            800: '#0a0a0a',
+                            700: '#050505',
+                        },
+                        cosmic: {
+                            orange: '#FF7A18',
+                            pink: '#FF3E6C',
+                            red: '#FF4D5A',
+                            coral: '#FF6F61',
+                        },
+                        cream: {
+                            100: '#F5EDE3',
+                            200: '#EAE2D6',
+                        },
+                        pixel: {
+                            cyan: '#5CE1E6',
+                            mint: '#B8FF5C',
+                        }
+                    },
+                    fontFamily: {
+                        'space': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        'pixel': ['"Press Start 2P"', 'monospace'],
+                        'body': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        'apple': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(255, 122, 24, 0.5)',
+                        'glow-pink': '0 0 20px rgba(255, 62, 108, 0.5)',
+                        'glow-cyan': '0 0 15px rgba(92, 225, 230, 0.6)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Apple-style fonts + Playfair Display for elegant serif titles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Press+Start+2P&family=Playfair+Display:ital,wght@1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom, #000000, #0a0a0a, #050505);
+            color: #f5f5f7; /* Apple's off-white */
+            overflow-x: hidden;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+        }
+        
+        /* Smooth section transitions */
+        section {
+            position: relative;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        
+        /* Fade effect between sections */
+        section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        section:first-of-type::before {
+            display: none;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Apple-style Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em; /* Apple's tight tracking */
+            color: #f5f5f7;
+            line-height: 1.0834933333; /* Apple's precise line height */
+        }
+        
+        p, span, a, div {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: -0.005em;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Apple heading sizes and colors */
+        .apple-headline {
+            font-size: clamp(48px, 5vw, 96px);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            color: #f5f5f7; /* Apple white */
+        }
+        
+        .apple-subheadline {
+            font-size: clamp(21px, 2.5vw, 28px);
+            font-weight: 400;
+            line-height: 1.2857342857;
+            letter-spacing: 0.007em;
+            color: #a1a1a6; /* Apple gray */
+        }
+        
+        .apple-body {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.4705882353;
+            letter-spacing: -0.022em;
+            color: #a1a1a6;
+        }
+        
+        .apple-body-large {
+            font-size: 21px;
+            font-weight: 400;
+            line-height: 1.381002381;
+            letter-spacing: 0.011em;
+            color: #a1a1a6;
+        }
+        
+        .apple-caption {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.4285914286;
+            letter-spacing: -0.016em;
+            color: #86868b; /* Apple lighter gray */
+        }
+        
+        .apple-link {
+            color: #2997ff; /* Apple blue */
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        
+        .apple-link:hover {
+            color: #147ce5;
+            text-decoration: underline;
+        }
+        
+        /* Enhance existing gradient text for Apple style */
+        .gradient-text {
+            background: linear-gradient(135deg, #FF7A18 0%, #FF3E6C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .card-glow {
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(255, 122, 24, 0.3);
+            box-shadow: 0 0 20px rgba(255, 122, 24, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-glow:hover {
+            border-color: rgba(255, 62, 108, 0.5);
+            box-shadow: 0 0 30px rgba(255, 62, 108, 0.3);
+        }
+        
+        .pixel-border {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 122, 24, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 62, 108, 0.5); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #FF7A18, #FF3E6C);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #FF3E6C, #FF4D5A);
+        }
+        
+        /* Tubes Cursor Canvas */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Ensure hero content is above canvas */
+        .hero-content-layer {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { motion, useScroll, useTransform, AnimatePresence } = Motion;
+        
+        // Pixel Art Icon Component Library
+        const PixelIcons = {
+            home: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="3" y="9" width="18" height="12" fill="currentColor"/>
+                    <rect x="5" y="11" width="4" height="4" fill="#000"/>
+                    <rect x="15" y="11" width="4" height="4" fill="#000"/>
+                    <rect x="10" y="15" width="4" height="6" fill="#000"/>
+                    <rect x="9" y="6" width="6" height="3" fill="currentColor"/>
+                    <rect x="6" y="9" width="3" height="3" fill="currentColor"/>
+                    <rect x="15" y="9" width="3" height="3" fill="currentColor"/>
+                </svg>
+            ),
+            user: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="9" y="5" width="6" height="2" fill="currentColor"/>
+                    <rect x="7" y="7" width="2" height="2" fill="currentColor"/>
+                    <rect x="15" y="7" width="2" height="2" fill="currentColor"/>
+                    <rect x="9" y="7" width="6" height="4" fill="currentColor"/>
+                    <rect x="7" y="9" width="2" height="4" fill="currentColor"/>
+                    <rect x="15" y="9" width="2" height="4" fill="currentColor"/>
+                    <rect x="6" y="13" width="12" height="2" fill="currentColor"/>
+                    <rect x="5" y="15" width="14" height="6" fill="currentColor"/>
+                    <rect x="7" y="17" width="2" height="4" fill="#000"/>
+                    <rect x="15" y="17" width="2" height="4" fill="#000"/>
+                </svg>
+            ),
+            code: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="5" y="8" width="2" height="2" fill="currentColor"/>
+                    <rect x="7" y="10" width="2" height="2" fill="currentColor"/>
+                    <rect x="9" y="12" width="2" height="2" fill="currentColor"/>
+                    <rect x="7" y="14" width="2" height="2" fill="currentColor"/>
+                    <rect x="5" y="16" width="2" height="2" fill="currentColor"/>
+                    <rect x="17" y="8" width="2" height="2" fill="currentColor"/>
+                    <rect x="15" y="10" width="2" height="2" fill="currentColor"/>
+                    <rect x="13" y="12" width="2" height="2" fill="currentColor"/>
+                    <rect x="15" y="14" width="2" height="2" fill="currentColor"/>
+                    <rect x="17" y="16" width="2" height="2" fill="currentColor"/>
+                </svg>
+            ),
+            folder: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="4" y="8" width="6" height="2" fill="currentColor"/>
+                    <rect x="10" y="8" width="10" height="2" fill="currentColor"/>
+                    <rect x="4" y="10" width="16" height="10" fill="currentColor"/>
+                    <rect x="6" y="12" width="12" height="2" fill="#000" opacity="0.3"/>
+                </svg>
+            ),
+            star: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="11" y="4" width="2" height="2" fill="currentColor"/>
+                    <rect x="9" y="6" width="6" height="2" fill="currentColor"/>
+                    <rect x="7" y="8" width="2" height="2" fill="currentColor"/>
+                    <rect x="15" y="8" width="2" height="2" fill="currentColor"/>
+                    <rect x="5" y="10" width="14" height="2" fill="currentColor"/>
+                    <rect x="9" y="12" width="6" height="2" fill="currentColor"/>
+                    <rect x="7" y="14" width="2" height="4" fill="currentColor"/>
+                    <rect x="15" y="14" width="2" height="4" fill="currentColor"/>
+                    <rect x="11" y="14" width="2" height="6" fill="currentColor"/>
+                </svg>
+            ),
+            mail: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="3" y="6" width="18" height="12" fill="currentColor"/>
+                    <rect x="5" y="8" width="2" height="2" fill="#000"/>
+                    <rect x="7" y="10" width="2" height="2" fill="#000"/>
+                    <rect x="9" y="12" width="2" height="2" fill="#000"/>
+                    <rect x="13" y="12" width="2" height="2" fill="#000"/>
+                    <rect x="15" y="10" width="2" height="2" fill="#000"/>
+                    <rect x="17" y="8" width="2" height="2" fill="#000"/>
+                </svg>
+            ),
+            github: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="9" y="4" width="6" height="2" fill="currentColor"/>
+                    <rect x="7" y="6" width="10" height="2" fill="currentColor"/>
+                    <rect x="5" y="8" width="14" height="6" fill="currentColor"/>
+                    <rect x="9" y="10" width="2" height="2" fill="#000"/>
+                    <rect x="13" y="10" width="2" height="2" fill="#000"/>
+                    <rect x="7" y="14" width="4" height="4" fill="currentColor"/>
+                    <rect x="13" y="14" width="4" height="4" fill="currentColor"/>
+                    <rect x="7" y="18" width="2" height="2" fill="currentColor"/>
+                    <rect x="15" y="18" width="2" height="2" fill="currentColor"/>
+                </svg>
+            ),
+            linkedin: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="4" y="4" width="16" height="16" fill="currentColor"/>
+                    <rect x="7" y="7" width="2" height="2" fill="#000"/>
+                    <rect x="7" y="11" width="2" height="6" fill="#000"/>
+                    <rect x="11" y="11" width="2" height="6" fill="#000"/>
+                    <rect x="13" y="11" width="2" height="2" fill="#000"/>
+                    <rect x="13" y="15" width="2" height="2" fill="#000"/>
+                    <rect x="15" y="13" width="2" height="4" fill="#000"/>
+                </svg>
+            ),
+            twitter: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="6" y="6" width="2" height="2" fill="currentColor"/>
+                    <rect x="8" y="8" width="2" height="2" fill="currentColor"/>
+                    <rect x="10" y="10" width="4" height="2" fill="currentColor"/>
+                    <rect x="14" y="8" width="2" height="2" fill="currentColor"/>
+                    <rect x="16" y="6" width="2" height="2" fill="currentColor"/>
+                    <rect x="6" y="12" width="6" height="2" fill="currentColor"/>
+                    <rect x="8" y="14" width="6" height="2" fill="currentColor"/>
+                    <rect x="10" y="16" width="4" height="2" fill="currentColor"/>
+                </svg>
+            ),
+            chart: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="5" y="14" width="3" height="6" fill="currentColor"/>
+                    <rect x="10" y="10" width="3" height="10" fill="currentColor"/>
+                    <rect x="15" y="6" width="3" height="14" fill="currentColor"/>
+                    <rect x="4" y="20" width="16" height="1" fill="currentColor"/>
+                </svg>
+            ),
+            fire: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="11" y="4" width="2" height="2" fill="currentColor"/>
+                    <rect x="9" y="6" width="6" height="2" fill="currentColor"/>
+                    <rect x="7" y="8" width="10" height="4" fill="currentColor"/>
+                    <rect x="8" y="12" width="8" height="4" fill="currentColor"/>
+                    <rect x="10" y="16" width="4" height="2" fill="currentColor"/>
+                    <rect x="11" y="10" width="2" height="2" fill="#000"/>
+                </svg>
+            ),
+            box: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="8" y="5" width="8" height="2" fill="currentColor"/>
+                    <rect x="6" y="7" width="12" height="2" fill="currentColor"/>
+                    <rect x="5" y="9" width="14" height="10" fill="currentColor"/>
+                    <rect x="7" y="11" width="10" height="2" fill="#000" opacity="0.3"/>
+                    <rect x="11" y="7" width="2" height="6" fill="#000" opacity="0.2"/>
+                </svg>
+            ),
+            sparkle: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="11" y="3" width="2" height="4" fill="currentColor"/>
+                    <rect x="11" y="17" width="2" height="4" fill="currentColor"/>
+                    <rect x="3" y="11" width="4" height="2" fill="currentColor"/>
+                    <rect x="17" y="11" width="4" height="2" fill="currentColor"/>
+                    <rect x="6" y="6" width="2" height="2" fill="currentColor"/>
+                    <rect x="16" y="6" width="2" height="2" fill="currentColor"/>
+                    <rect x="6" y="16" width="2" height="2" fill="currentColor"/>
+                    <rect x="16" y="16" width="2" height="2" fill="currentColor"/>
+                    <rect x="10" y="10" width="4" height="4" fill="currentColor"/>
+                </svg>
+            ),
+            blog: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="5" y="4" width="14" height="16" fill="currentColor"/>
+                    <rect x="7" y="6" width="10" height="2" fill="#000"/>
+                    <rect x="7" y="10" width="10" height="1" fill="#000" opacity="0.5"/>
+                    <rect x="7" y="12" width="8" height="1" fill="#000" opacity="0.5"/>
+                    <rect x="7" y="14" width="10" height="1" fill="#000" opacity="0.5"/>
+                    <rect x="7" y="16" width="6" height="1" fill="#000" opacity="0.5"/>
+                </svg>
+            ),
+            pen: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="14" y="4" width="4" height="2" fill="currentColor"/>
+                    <rect x="12" y="6" width="2" height="2" fill="currentColor"/>
+                    <rect x="10" y="8" width="2" height="2" fill="currentColor"/>
+                    <rect x="8" y="10" width="2" height="2" fill="currentColor"/>
+                    <rect x="6" y="12" width="2" height="2" fill="currentColor"/>
+                    <rect x="4" y="14" width="2" height="2" fill="currentColor"/>
+                    <rect x="4" y="16" width="4" height="4" fill="currentColor"/>
+                    <rect x="16" y="6" width="2" height="2" fill="#000"/>
+                </svg>
+            ),
+            link: () => (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
+                    <rect x="13" y="5" width="6" height="2" fill="currentColor"/>
+                    <rect x="17" y="7" width="2" height="4" fill="currentColor"/>
+                    <rect x="11" y="9" width="6" height="2" fill="currentColor"/>
+                    <rect x="7" y="11" width="6" height="2" fill="currentColor"/>
+                    <rect x="5" y="13" width="2" height="4" fill="currentColor"/>
+                    <rect x="5" y="17" width="6" height="2" fill="currentColor"/>
+                </svg>
+            ),
+        };
+        
+        // Starfield Background Component
+        const Starfield = () => {
+            const canvasRef = useRef(null);
+            
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                
+                const stars = Array.from({ length: 150 }, () => ({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2,
+                    speed: Math.random() * 0.3 + 0.1,
+                    opacity: Math.random() * 0.8 + 0.2,
+                }));
+                
+                const animate = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    stars.forEach(star => {
+                        star.y += star.speed;
+                        if (star.y > canvas.height) {
+                            star.y = 0;
+                            star.x = Math.random() * canvas.width;
+                        }
+                        
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(245, 237, 227, ${star.opacity})`;
+                        ctx.fill();
+                    });
+                    
+                    requestAnimationFrame(animate);
+                };
+                
+                animate();
+                
+                const handleResize = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                };
+                
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize);
+            }, []);
+            
+            return <canvas ref={canvasRef} className="starfield" />;
+        };
+        
+        // Pixel Icon Component
+        const PixelIcon = ({ icon, color = "cyan", className = "" }) => {
+            const IconComponent = PixelIcons[icon];
+            const colorClass = color === "cyan" ? "text-pixel-cyan" : 
+                              color === "orange" ? "text-cosmic-orange" : 
+                              color === "pink" ? "text-cosmic-pink" : 
+                              color === "mint" ? "text-pixel-mint" : "text-pixel-cyan";
+            
+            return (
+                <div className={`inline-flex items-center justify-center p-2 bg-space-800 border-2 border-current ${colorClass} ${className}`}>
+                    {IconComponent ? <IconComponent /> : <span className="text-xs font-pixel">{icon}</span>}
+                </div>
+            );
+        };
+        
+        // Navigation Component
+        const NavBar = () => {
+            const [scrolled, setScrolled] = useState(false);
+            
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+            
+            const navItems = ['About', 'Projects', 'Blog', 'Activity', 'Contact'];
+            
+            return (
+                <motion.nav
+                    initial={{ y: -100 }}
+                    animate={{ y: 0 }}
+                    className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+                        scrolled ? 'bg-space-900/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+                    }`}
+                >
+                    <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            className="flex items-center gap-2 cursor-pointer"
+                        >
+                            <PixelIcon icon="code" color="orange" />
+                            <span className="text-2xl font-bold" style={{ letterSpacing: '-0.02em', color: '#f5f5f7' }}>Portfolio</span>
+                        </motion.div>
+                        
+                        <div className="hidden md:flex gap-8">
+                            {navItems.map((item) => (
+                                <motion.a
+                                    key={item}
+                                    href={`#${item.toLowerCase()}`}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="hover:text-cosmic-orange transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-cosmic-pink rounded-md px-2 py-1 apple-body"
+                                    style={{ color: '#f5f5f7' }}
+                                >
+                                    {item}
+                                </motion.a>
+                            ))}
+                        </div>
+                        
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="md:hidden focus:outline-none focus:ring-2 focus:ring-cosmic-pink rounded"
+                            style={{ color: '#f5f5f7' }}
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </motion.button>
+                    </div>
+                </motion.nav>
+            );
+        };
+        
+        // Button Component
+        const GradientButton = ({ children, onClick, variant = "primary" }) => (
+            <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onClick}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cosmic-pink focus:ring-offset-2 focus:ring-offset-space-900 ${
+                    variant === "primary"
+                        ? "bg-gradient-to-r from-cosmic-orange to-cosmic-pink text-white shadow-glow hover:shadow-glow-pink"
+                        : "border-2 border-cosmic-orange text-cosmic-orange hover:bg-cosmic-orange/10"
+                }`}
+            >
+                {children}
+            </motion.button>
+        );
+        
+        // Hero Section
+        const Hero = () => {
+            const canvasRef = useRef(null);
+            const heroSectionRef = useRef(null);
+            const tubesAppRef = useRef(null);
+            const { scrollY } = useScroll();
+            const y = useTransform(scrollY, [0, 500], [0, 150]);
+            const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+            
+            // Initialize Tubes Cursor effect for hero section only
+            useEffect(() => {
+                if (!canvasRef.current || typeof window.TubesCursor === 'undefined') return;
+                
+                // Wait a bit for the library to fully load
+                const initTimer = setTimeout(() => {
+                    try {
+                        // Customize tube colors here - matches your theme
+                        tubesAppRef.current = window.TubesCursor(canvasRef.current, {
+                            tubes: {
+                                colors: ["#FF7A18", "#FF3E6C", "#5CE1E6"], // Orange, Pink, Cyan (your theme colors)
+                                lights: {
+                                    intensity: 200,
+                                    colors: ["#FF7A18", "#FF3E6C", "#5CE1E6", "#B8FF5C"] // Theme color lights
+                                }
+                            }
+                        });
+                        
+                        // Optional: Change colors on click within hero section
+                        const handleHeroClick = () => {
+                            if (tubesAppRef.current) {
+                                // Cycle through your theme colors
+                                const themeColors = [
+                                    ["#FF7A18", "#FF3E6C", "#5CE1E6"], // Default
+                                    ["#FF3E6C", "#5CE1E6", "#B8FF5C"], // Variant 1
+                                    ["#5CE1E6", "#FF7A18", "#FF3E6C"], // Variant 2
+                                ];
+                                const randomSet = themeColors[Math.floor(Math.random() * themeColors.length)];
+                                tubesAppRef.current.tubes.setColors(randomSet);
+                            }
+                        };
+                        
+                        if (heroSectionRef.current) {
+                            heroSectionRef.current.addEventListener('click', handleHeroClick);
+                        }
+                        
+                        return () => {
+                            if (heroSectionRef.current) {
+                                heroSectionRef.current.removeEventListener('click', handleHeroClick);
+                            }
+                        };
+                    } catch (error) {
+                        console.log('Tubes Cursor initialization skipped:', error);
+                    }
+                }, 1000);
+                
+                return () => {
+                    clearTimeout(initTimer);
+                    if (tubesAppRef.current && tubesAppRef.current.dispose) {
+                        tubesAppRef.current.dispose();
+                    }
+                };
+            }, []);
+            
+            return (
+                <section 
+                    ref={heroSectionRef}
+                    className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden"
+                >
+                    {/* Tubes Cursor Canvas - Only for Hero Section */}
+                    <canvas 
+                        ref={canvasRef}
+                        id="hero-canvas"
+                    />
+                    
+                    <motion.div 
+                        className="max-w-4xl mx-auto text-center hero-content-layer"
+                        style={{ y, opacity }}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                        
+                        {/* Name with elegant serif font */}
+                        <h1 className="mb-6" style={{ 
+                            fontFamily: "'Playfair Display', serif",
+                            fontSize: 'clamp(56px, 10vw, 120px)',
+                            fontWeight: 300,
+                            fontStyle: 'italic',
+                            color: '#f5f5f7',
+                            letterSpacing: '-0.01em',
+                            lineHeight: 1.1,
+                            whiteSpace: 'nowrap',
+                            opacity: 0.9
+                        }}>
+                            Harshit Vaishnav
+                        </h1>
+                        
+                        <p className="apple-subheadline mb-4">
+                            Full Stack Developer & Tech Blogger
+                        </p>
+                        
+                        <p className="apple-body-large mb-12 max-w-2xl mx-auto">
+                            Building dreamlike digital experiences that blend retro-futurism with modern technology.
+                            Crafting pixel-perfect interfaces across the cosmos.
+                        </p>
+                        
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <GradientButton onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>
+                                View Projects
+                            </GradientButton>
+                            <GradientButton variant="secondary" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
+                                Get In Touch
+                            </GradientButton>
+                        </div>
+                        
+                        {/* Animated scroll indicator */}
+                        <motion.div
+                            animate={{ y: [0, 10, 0] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            className="mt-16 cursor-pointer"
+                            onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
+                        >
+                            <div className="flex flex-col items-center gap-2">
+                                <span className="apple-caption" style={{ color: '#a1a1a6' }}>Scroll to explore</span>
+                                <div className="w-6 h-10 border-2 border-cosmic-orange/50 rounded-full flex justify-center p-2">
+                                    <motion.div
+                                        animate={{ y: [0, 12, 0] }}
+                                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                        className="w-1.5 h-1.5 bg-cosmic-orange rounded-full"
+                                    />
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                </motion.div>
+            </section>
+        );
+        };
+        
+        // About Section
+        const About = () => {
+            const skills = [
+                "React", "TypeScript", "Node.js", "Python", "Tailwind CSS",
+                "Next.js", "MongoDB", "PostgreSQL", "AWS", "Docker"
+            ];
+            
+            return (
+                <section id="about" className="min-h-screen py-20 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="apple-headline text-center mb-12" style={{ color: '#f5f5f7' }}>
+                                About Me
+                            </h2>
+                            
+                            <div className="grid md:grid-cols-2 gap-12 items-center">
+                                <motion.div
+                                    initial={{ opacity: 0, x: -50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                >
+                                    <p className="apple-body-large mb-6">
+                                        I'm a passionate developer who loves creating unique digital experiences. 
+                                        My work combines technical precision with creative vision, always pushing 
+                                        the boundaries of what's possible on the web.
+                                    </p>
+                                    <p className="apple-body-large">
+                                        When I'm not coding, you'll find me exploring new technologies, contributing 
+                                        to open source, or designing pixel art in my spare time.
+                                    </p>
+                                </motion.div>
+                                
+                                <motion.div
+                                    initial={{ opacity: 0, x: 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.4 }}
+                                >
+                                    <h3 className="text-2xl font-apple font-semibold mb-6 text-cosmic-orange" style={{ fontSize: '28px', fontWeight: 600, letterSpacing: '-0.01em' }}>
+                                        Skills & Technologies
+                                    </h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {skills.map((skill, index) => (
+                                            <motion.span
+                                                key={skill}
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                whileInView={{ opacity: 1, scale: 1 }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 0.3, delay: index * 0.05 }}
+                                                whileHover={{ scale: 1.1 }}
+                                                className="px-4 py-2 bg-space-800/60 border border-pixel-cyan/30 rounded-lg font-medium hover:border-pixel-cyan hover:shadow-glow-cyan transition-all cursor-default apple-body"
+                                                style={{ fontSize: '15px', fontWeight: 500, color: '#f5f5f7' }}
+                                            >
+                                                {skill}
+                                            </motion.span>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        };
+        
+        // Project Card Component
+        const ProjectCard = ({ title, description, tags, liveUrl, codeUrl, delay = 0 }) => (
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay }}
+                whileHover={{ y: -10 }}
+                className="card-glow rounded-xl p-6 transition-all duration-300 group"
+            >
+                <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-2xl font-apple font-bold group-hover:text-cosmic-orange transition-colors" style={{ fontSize: '24px', fontWeight: 700, letterSpacing: '-0.01em', color: '#f5f5f7' }}>
+                        {title}
+                    </h3>
+                    <PixelIcon icon="star" color="pink" />
+                </div>
+                
+                <p className="apple-body mb-6">
+                    {description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                    {tags.map((tag) => (
+                        <span
+                            key={tag}
+                            className="px-3 py-1 text-sm bg-cosmic-orange/20 border border-cosmic-orange/40 rounded text-cosmic-orange font-medium"
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+                
+                <div className="flex gap-4">
+                    <motion.a
+                        href={liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 text-cosmic-pink hover:text-cosmic-coral transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-cosmic-pink rounded px-2 py-1"
+                    >
+                        <PixelIcon icon="link" color="pink" className="scale-75" />
+                        <span>Live Demo</span>
+                    </motion.a>
+                    <motion.a
+                        href={codeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 text-pixel-cyan hover:text-pixel-mint transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-pixel-cyan rounded px-2 py-1"
+                    >
+                        <PixelIcon icon="github" color="cyan" className="scale-75" />
+                        <span>Code</span>
+                    </motion.a>
+                </div>
+            </motion.div>
+        );
+        
+        // Projects Section
+        const Projects = () => {
+            // Add your projects here manually
+            // Example format:
+            // {
+            //     title: "Project Name",
+            //     description: "Project description goes here",
+            //     tags: ["React", "TypeScript", "Tailwind"],
+            //     liveUrl: "https://your-live-demo.com",
+            //     codeUrl: "https://github.com/yourusername/repo"
+            // }
+            const projects = [];
+            
+            return (
+                <section id="projects" className="min-h-screen py-20 px-6 bg-gradient-to-b from-transparent to-space-800/20">
+                    <div className="max-w-7xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="apple-headline text-center mb-4" style={{ color: '#f5f5f7' }}>
+                                Featured Projects
+                            </h2>
+                            <p className="text-center apple-subheadline mb-16">
+                                A collection of my recent work and experiments
+                            </p>
+                            
+                            {projects.length > 0 ? (
+                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    {projects.map((project, index) => (
+                                        <ProjectCard
+                                            key={project.title}
+                                            {...project}
+                                            delay={index * 0.1}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    className="text-center py-20"
+                                >
+                                    <motion.div
+                                        animate={{ 
+                                            y: [0, -10, 0],
+                                            rotate: [0, 5, -5, 0]
+                                        }}
+                                        transition={{ 
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                        className="inline-block mb-8"
+                                    >
+                                        <div className="scale-[2.5]">
+                                            <PixelIcon icon="folder" color="orange" />
+                                        </div>
+                                    </motion.div>
+                                    <h3 className="apple-headline mb-4" style={{ fontSize: '32px', color: '#f5f5f7' }}>
+                                        Coming Soon
+                                    </h3>
+                                    <p className="apple-body mb-8" style={{ color: '#86868b' }}>
+                                        Exciting projects are on the way. Stay tuned!
+                                    </p>
+                                </motion.div>
+                            )}
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        };
+        
+        // Activity/Achievements Section
+        const Activity = () => {
+            // Add your activity stats here manually
+            // Example format for stats:
+            // { label: "Repositories", value: "47", icon: "box" }
+            // { label: "Contributions", value: "1,234", icon: "sparkle" }
+            // { label: "Streak Days", value: "127", icon: "fire" }
+            
+            // Add your contribution data here manually
+            // Example format:
+            // const streakDays = Array.from({ length: 52 }, (_, i) => ({
+            //     week: i,
+            //     count: Math.floor(Math.random() * 5)
+            // }));
+            
+            const stats = [];
+            const hasContributionData = false; // Set to true when you add contribution data
+            
+            return (
+                <section id="activity" className="min-h-screen py-20 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="apple-headline text-center mb-16" style={{ color: '#f5f5f7' }}>
+                                Activity & Achievements
+                            </h2>
+                            
+                            {stats.length > 0 || hasContributionData ? (
+                                <>
+                                    {stats.length > 0 && (
+                                        <div className="grid md:grid-cols-3 gap-8 mb-16">
+                                            {stats.map((stat, index) => (
+                                                <motion.div
+                                                    key={stat.label}
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    whileInView={{ opacity: 1, scale: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                                    whileHover={{ scale: 1.05 }}
+                                                    className="card-glow rounded-xl p-8 text-center"
+                                                >
+                                                    <div className="flex justify-center mb-4 scale-150">
+                                                        <PixelIcon icon={stat.icon} color="orange" />
+                                                    </div>
+                                                    <div className="text-4xl font-apple font-bold mb-2" style={{ fontSize: '48px', fontWeight: 700, letterSpacing: '-0.02em', color: '#f5f5f7' }}>
+                                                        {stat.value}
+                                                    </div>
+                                                    <div className="apple-body" style={{ color: '#a1a1a6' }}>
+                                                        {stat.label}
+                                                    </div>
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    className="text-center py-20"
+                                >
+                                    <motion.div
+                                        animate={{ 
+                                            scale: [1, 1.1, 1],
+                                            rotate: [0, 5, -5, 0]
+                                        }}
+                                        transition={{ 
+                                            duration: 3,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                        className="inline-block mb-8"
+                                    >
+                                        <div className="scale-[2.5]">
+                                            <PixelIcon icon="chart" color="orange" />
+                                        </div>
+                                    </motion.div>
+                                    <h3 className="apple-headline mb-4" style={{ fontSize: '32px', color: '#f5f5f7' }}>
+                                        Coming Soon
+                                    </h3>
+                                    <p className="apple-body mb-8" style={{ color: '#86868b' }}>
+                                        Activity stats and achievements will be added here.
+                                    </p>
+                                </motion.div>
+                            )}
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        };
+        
+        // Blog Section
+        const Blog = () => {
+            const blogPosts = [
+                // Add your blog posts here manually
+                // Example format:
+                // {
+                //     title: "Your Blog Title",
+                //     excerpt: "Brief description of your blog post...",
+                //     date: "Nov 1, 2025",
+                //     readTime: "5 min read",
+                //     tags: ["React", "TypeScript"],
+                //     slug: "/blog/your-post-slug"
+                // }
+            ];
+            
+            return (
+                <section id="blog" className="min-h-screen py-20 px-6 bg-gradient-to-b from-transparent via-space-800/10 to-transparent">
+                    <div className="max-w-7xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <div className="text-center mb-16">
+                                <div className="flex justify-center mb-6">
+                                    <motion.div
+                                        animate={{ rotate: [0, -5, 5, -5, 0] }}
+                                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                                    >
+                                        <div className="scale-150">
+                                            <PixelIcon icon="pen" color="orange" />
+                                        </div>
+                                    </motion.div>
+                                </div>
+                                <h2 className="apple-headline mb-4" style={{ color: '#f5f5f7' }}>
+                                    Blog & Insights
+                                </h2>
+                                <p className="apple-subheadline max-w-2xl mx-auto">
+                                    Sharing thoughts on development, design, and technology. 
+                                    Join me on this journey of continuous learning.
+                                </p>
+                            </div>
+                            
+                            {blogPosts.length > 0 ? (
+                                <>
+                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                        {blogPosts.map((post, index) => (
+                                            <motion.article
+                                                key={post.title}
+                                                initial={{ opacity: 0, y: 50 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                                whileHover={{ y: -10 }}
+                                                className="card-glow rounded-xl p-6 transition-all duration-300 group cursor-pointer"
+                                                onClick={() => window.location.href = post.slug}
+                                            >
+                                                <div className="flex items-center gap-2 apple-caption mb-4">
+                                                    <span>{post.date}</span>
+                                                    <span>•</span>
+                                                    <span>{post.readTime}</span>
+                                                </div>
+                                                
+                                                <h3 className="text-xl font-semibold mb-3 group-hover:text-cosmic-orange transition-colors apple-body-large" style={{ color: '#f5f5f7', fontSize: '21px', fontWeight: 600 }}>
+                                                    {post.title}
+                                                </h3>
+                                                
+                                                <p className="mb-6 leading-relaxed line-clamp-3 apple-body" style={{ color: '#a1a1a6' }}>
+                                                    {post.excerpt}
+                                                </p>
+                                                
+                                                <div className="flex flex-wrap gap-2 mb-4">
+                                                    {post.tags.map((tag) => (
+                                                        <span
+                                                            key={tag}
+                                                            className="px-3 py-1 text-xs bg-pixel-cyan/10 border border-pixel-cyan/30 rounded text-pixel-cyan font-medium"
+                                                        >
+                                                            #{tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                                
+                                                <motion.div
+                                                    className="flex items-center gap-2 text-cosmic-pink font-semibold text-sm"
+                                                    whileHover={{ x: 5 }}
+                                                >
+                                                    <span>Read More</span>
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </motion.div>
+                                            </motion.article>
+                                        ))}
+                                    </div>
+                                    
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.6, delay: 0.4 }}
+                                        className="text-center mt-12"
+                                    >
+                                        <p className="mb-6 apple-body" style={{ color: '#86868b' }}>
+                                            More articles coming soon! Subscribe to stay updated.
+                                        </p>
+                                        <GradientButton onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
+                                            Get Notified
+                                        </GradientButton>
+                                    </motion.div>
+                                </>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    className="text-center py-20"
+                                >
+                                    <div className="flex justify-center mb-6">
+                                        <PixelIcon icon="blog" color="cyan" className="scale-150" />
+                                    </div>
+                                    <h3 className="text-2xl font-apple font-semibold mb-4" style={{ fontSize: '28px', fontWeight: 600, color: '#f5f5f7', letterSpacing: '-0.01em' }}>
+                                        Coming Soon
+                                    </h3>
+                                    <p className="apple-body-large max-w-md mx-auto mb-8">
+                                        I'm currently working on some exciting content. Check back soon for articles on development, design, and technology!
+                                    </p>
+                                    <GradientButton onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
+                                        Get Notified When I Publish
+                                    </GradientButton>
+                                </motion.div>
+                            )}
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        };
+        
+        // Contact Section
+        const Contact = () => {
+            const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+            const [submitted, setSubmitted] = useState(false);
+            
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                console.log('Form submitted:', formData);
+                setSubmitted(true);
+                setTimeout(() => setSubmitted(false), 3000);
+            };
+            
+            const socialLinks = [
+                { name: "GitHub", url: "https://github.com", icon: "github" },
+                { name: "LinkedIn", url: "https://linkedin.com", icon: "linkedin" },
+                { name: "Twitter", url: "https://twitter.com", icon: "twitter" },
+                { name: "Email", url: "mailto:hello@example.com", icon: "mail" }
+            ];
+            
+            return (
+                <section id="contact" className="min-h-screen py-20 px-6 bg-gradient-to-t from-space-800/30 to-transparent">
+                    <div className="max-w-4xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="apple-headline text-center mb-4" style={{ color: '#f5f5f7' }}>
+                                Get In Touch
+                            </h2>
+                            <p className="text-center apple-subheadline mb-16">
+                                Let's create something amazing together
+                            </p>
+                            
+                            <div className="grid md:grid-cols-2 gap-12">
+                                <motion.div
+                                    initial={{ opacity: 0, x: -50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6 }}
+                                >
+                                    <h3 className="text-2xl font-apple font-semibold mb-6 text-cosmic-orange" style={{ fontSize: '24px', fontWeight: 600, letterSpacing: '-0.01em' }}>
+                                        Connect with me
+                                    </h3>
+                                    <div className="space-y-4 mb-8">
+                                        {socialLinks.map((link) => (
+                                            <motion.a
+                                                key={link.name}
+                                                href={link.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                whileHover={{ x: 10 }}
+                                                className="flex items-center gap-4 apple-link group"
+                                                style={{ color: '#f5f5f7' }}
+                                            >
+                                                <PixelIcon icon={link.icon} color="cyan" className="group-hover:border-cosmic-pink transition-colors" />
+                                                <span className="font-medium apple-body">{link.name}</span>
+                                            </motion.a>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                                
+                                <motion.form
+                                    initial={{ opacity: 0, x: 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6 }}
+                                    onSubmit={handleSubmit}
+                                    className="space-y-6"
+                                >
+                                    <div>
+                                        <label htmlFor="name" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
+                                            Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            required
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
+                                            style={{ color: '#f5f5f7' }}
+                                            placeholder="Your name"
+                                        />
+                                    </div>
+                                    
+                                    <div>
+                                        <label htmlFor="email" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
+                                            style={{ color: '#f5f5f7' }}
+                                            placeholder="your@email.com"
+                                        />
+                                    </div>
+                                    
+                                    <div>
+                                        <label htmlFor="message" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
+                                            Message
+                                        </label>
+                                        <textarea
+                                            id="message"
+                                            required
+                                            rows={5}
+                                            value={formData.message}
+                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                            className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all resize-none apple-body"
+                                            style={{ color: '#f5f5f7' }}
+                                            placeholder="Your message..."
+                                        />
+                                    </div>
+                                    
+                                    <GradientButton>
+                                        {submitted ? '✓ Sent!' : 'Send Message'}
+                                    </GradientButton>
+                                </motion.form>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        };
+        
+        // Footer with Advanced Scroll Effect
+        const Footer = () => {
+            const { scrollYProgress } = useScroll();
+            const canvasRef = useRef(null);
+            const animationRef = useRef(null);
+            const [showBurst, setShowBurst] = useState(false);
+            const [hasTriggered, setHasTriggered] = useState(false);
+            
+            // Track scroll to bottom and trigger burst effect
+            useEffect(() => {
+                const handleScroll = () => {
+                    const scrolledToBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100;
+                    
+                    if (scrolledToBottom && !hasTriggered) {
+                        setShowBurst(true);
+                        setHasTriggered(true);
+                        
+                        // Auto-hide after 4 seconds (customize duration here)
+                        setTimeout(() => {
+                            setShowBurst(false);
+                        }, 4000);
+                    }
+                    
+                    // Reset trigger when scrolling away from bottom
+                    if (!scrolledToBottom && hasTriggered) {
+                        setTimeout(() => setHasTriggered(false), 1000);
+                    }
+                };
+                
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, [hasTriggered]);
+            
+            // Canvas-based animated gradient wave
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                
+                const ctx = canvas.getContext('2d');
+                let time = 0;
+                
+                const resize = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = 400; // Height of the wave area (customize here)
+                };
+                resize();
+                window.addEventListener('resize', resize);
+                
+                const animate = () => {
+                    const width = canvas.width;
+                    const height = canvas.height;
+                    
+                    ctx.clearRect(0, 0, width, height);
+                    
+                    const scrollProgress = scrollYProgress.get();
+                    
+                    // Start showing wave at 70% scroll (customize threshold here)
+                    if (scrollProgress > 0.7) {
+                        const opacity = Math.min((scrollProgress - 0.7) / 0.3, 1);
+                        
+                        // Color configuration - customize these HSL values
+                        // Format: hue (0-360), saturation (0-100%), lightness (0-100%)
+                        const hueShift = (time * 0.5) % 360; // Speed of color rotation
+                        
+                        const gradient = ctx.createLinearGradient(0, height, 0, 0);
+                        
+                        // Customize gradient color stops here (position, hue, saturation, lightness)
+                        gradient.addColorStop(0, `hsla(${210 + hueShift}, 100%, 50%, ${opacity * 0.9})`);    // Deep Blue
+                        gradient.addColorStop(0.15, `hsla(${195 + hueShift}, 100%, 55%, ${opacity * 0.85})`); // Sky Blue
+                        gradient.addColorStop(0.3, `hsla(${180 + hueShift}, 100%, 60%, ${opacity * 0.8})`);   // Cyan
+                        gradient.addColorStop(0.45, `hsla(${50 + hueShift}, 100%, 55%, ${opacity * 0.75})`);  // Yellow
+                        gradient.addColorStop(0.6, `hsla(${25 + hueShift}, 100%, 55%, ${opacity * 0.7})`);    // Orange
+                        gradient.addColorStop(0.75, `hsla(${330 + hueShift}, 100%, 60%, ${opacity * 0.6})`);  // Pink
+                        gradient.addColorStop(0.88, `hsla(${280 + hueShift}, 100%, 60%, ${opacity * 0.5})`);  // Purple
+                        gradient.addColorStop(1, `hsla(${260 + hueShift}, 100%, 55%, ${opacity * 0.3})`);     // Deep Purple
+                        
+                        ctx.fillStyle = gradient;
+                        
+                        // Draw multiple wave layers (customize number of layers here)
+                        const numberOfLayers = 3; // More layers = more depth
+                        
+                        for (let layer = 0; layer < numberOfLayers; layer++) {
+                            ctx.save();
+                            ctx.globalCompositeOperation = layer === 0 ? 'source-over' : 'lighter';
+                            
+                            ctx.beginPath();
+                            
+                            // Wave parameters (customize for different wave shapes)
+                            const amplitude = 50 + (layer * 20);        // Wave height
+                            const frequency = 0.003 - (layer * 0.0005); // Wave frequency
+                            const speed = 1 + layer * 0.3;              // Animation speed per layer
+                            const phase = time * speed;
+                            
+                            for (let x = 0; x < width; x++) {
+                                // Complex wave formula - combines multiple sine waves
+                                const y = Math.sin(x * frequency + phase) * amplitude + 
+                                         Math.sin(x * frequency * 1.5 - phase * 0.7) * (amplitude * 0.5) +
+                                         Math.sin(x * frequency * 0.5 + phase * 1.3) * (amplitude * 0.3) +
+                                         height * (0.25 + layer * 0.15);
+                                
+                                if (x === 0) {
+                                    ctx.moveTo(x, y);
+                                } else {
+                                    ctx.lineTo(x, y);
+                                }
+                            }
+                            
+                            ctx.lineTo(width, height);
+                            ctx.lineTo(0, height);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.restore();
+                        }
+                        
+                        // Blur effect strength (customize blur amount here)
+                        ctx.filter = 'blur(60px)'; // Higher = more blur
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.drawImage(canvas, 0, 0);
+                        ctx.filter = 'none';
+                    }
+                    
+                    time += 0.015; // Animation speed (lower = slower)
+                    animationRef.current = requestAnimationFrame(animate);
+                };
+                
+                animate();
+                
+                return () => {
+                    window.removeEventListener('resize', resize);
+                    if (animationRef.current) {
+                        cancelAnimationFrame(animationRef.current);
+                    }
+                };
+            }, [scrollYProgress]);
+            
+            // Confetti/Particle Burst Configuration
+            const confettiColors = [
+                '#FF6B6B', '#4ECDC4', '#FFE66D', '#FF88DC', 
+                '#95E1D3', '#F38181', '#AA96DA', '#FCBAD3'
+            ]; // Customize confetti colors here
+            
+            return (
+                <footer className="relative py-8 px-6 border-t border-cosmic-orange/20 overflow-hidden">
+                    {/* Animated Canvas Wave */}
+                    <canvas 
+                        ref={canvasRef}
+                        className="absolute bottom-0 left-0 w-full pointer-events-none"
+                        style={{ height: '400px' }}
+                    />
+                    
+                    {/* Confetti Burst Effect - Triggers when reaching bottom */}
+                    <AnimatePresence>
+                        {showBurst && (
+                            <>
+                                {/* Color Bars Animation */}
+                                {[0, 1, 2, 3, 4, 5].map((i) => (
+                                    <motion.div
+                                        key={`bar-${i}`}
+                                        initial={{ y: 100, opacity: 0 }}
+                                        animate={{ 
+                                            y: -600, 
+                                            opacity: [0, 1, 1, 0],
+                                            scale: [1, 1.2, 1]
+                                        }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ 
+                                            duration: 3, // Duration of upward motion
+                                            delay: i * 0.1,
+                                            ease: "easeOut"
+                                        }}
+                                        className="absolute bottom-0 w-full h-32 pointer-events-none"
+                                        style={{
+                                            left: `${i * 16.66}%`,
+                                            width: '16.66%',
+                                            background: `linear-gradient(to top, ${confettiColors[i]}, transparent)`,
+                                            filter: 'blur(20px)',
+                                            zIndex: 5
+                                        }}
+                                    />
+                                ))}
+                                
+                                {/* Particle Burst */}
+                                {Array.from({ length: 40 }).map((_, i) => {
+                                    const angle = (i / 40) * Math.PI * 2;
+                                    const distance = 300 + Math.random() * 200;
+                                    const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                                    
+                                    return (
+                                        <motion.div
+                                            key={`particle-${i}`}
+                                            initial={{ 
+                                                x: '50%', 
+                                                y: 0,
+                                                opacity: 1,
+                                                scale: 1
+                                            }}
+                                            animate={{ 
+                                                x: `calc(50% + ${Math.cos(angle) * distance}px)`,
+                                                y: -Math.sin(angle) * distance,
+                                                opacity: 0,
+                                                scale: 0,
+                                                rotate: Math.random() * 720
+                                            }}
+                                            transition={{ 
+                                                duration: 2 + Math.random(),
+                                                ease: "easeOut"
+                                            }}
+                                            className="absolute bottom-0 w-3 h-3 rounded-full pointer-events-none"
+                                            style={{
+                                                backgroundColor: color,
+                                                boxShadow: `0 0 10px ${color}`,
+                                                zIndex: 10
+                                            }}
+                                        />
+                                    );
+                                })}
+                                
+                                {/* Center Glow Burst */}
+                                <motion.div
+                                    initial={{ scale: 0, opacity: 0 }}
+                                    animate={{ 
+                                        scale: [0, 3, 4],
+                                        opacity: [0, 0.8, 0]
+                                    }}
+                                    transition={{ duration: 2.5, ease: "easeOut" }}
+                                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full pointer-events-none"
+                                    style={{
+                                        background: 'radial-gradient(circle, rgba(255,107,107,0.8), rgba(78,205,196,0.6), transparent)',
+                                        filter: 'blur(40px)',
+                                        zIndex: 8
+                                    }}
+                                />
+                            </>
+                        )}
+                    </AnimatePresence>
+                    
+                    {/* Footer Content */}
+                    <div className="max-w-7xl mx-auto text-center relative z-10">
+                        <p className="apple-body" style={{ color: '#86868b' }}>
+                            © {new Date().getFullYear()} Harshit Vaishnav. Crafted with{' '}
+                            <span className="text-cosmic-pink">♥</span> and{' '}
+                            <span className="text-cosmic-orange">code</span>.
+                        </p>
+                        <p className="apple-caption mt-2">
+                            Built with React, Tailwind CSS & Framer Motion
+                        </p>
+                    </div>
+                </footer>
+            );
+        };
+        
+        // Main App Component
+        const App = () => {
+            return (
+                <>
+                    <Starfield />
+                    <NavBar />
+                    <main>
+                        <Hero />
+                        <About />
+                        <Projects />
+                        <Blog />
+                        <Activity />
+                        <Contact />
+                    </main>
+                    <Footer />
+                </>
+            );
+        };
+        
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
