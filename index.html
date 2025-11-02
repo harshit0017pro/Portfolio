@@ -90,6 +90,9 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             scroll-behavior: smooth;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
         }
         
         /* Smooth section transitions */
@@ -274,12 +277,20 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
+            will-change: transform, opacity;
         }
         
         /* Ensure hero content is above canvas */
         .hero-content-layer {
             position: relative;
             z-index: 2;
+            will-change: transform, opacity, width;
+        }
+        
+        /* Optimize all motion elements */
+        section, motion-div {
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
     </style>
 </head>
@@ -624,8 +635,10 @@
             const heroSectionRef = useRef(null);
             const tubesAppRef = useRef(null);
             const { scrollY } = useScroll();
-            const y = useTransform(scrollY, [0, 500], [0, 150]);
-            const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+            const y = useTransform(scrollY, [0, 800], [0, 200]);
+            const opacity = useTransform(scrollY, [0, 1000], [1, 1]); // Stays fully visible
+            const scale = useTransform(scrollY, [0, 800], [1, 0.9]);
+            const width = useTransform(scrollY, [0, 800], ["100%", "90%"]);
             
             // Initialize Tubes Cursor effect for hero section only
             useEffect(() => {
@@ -687,14 +700,15 @@
                     className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden"
                 >
                     {/* Tubes Cursor Canvas - Only for Hero Section */}
-                    <canvas 
+                    <motion.canvas 
                         ref={canvasRef}
                         id="hero-canvas"
+                        style={{ scale, opacity }}
                     />
                     
                     <motion.div 
                         className="max-w-4xl mx-auto text-center hero-content-layer"
-                        style={{ y, opacity }}
+                        style={{ y, opacity, scale, width }}
                     >
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
@@ -718,12 +732,12 @@
                         </h1>
                         
                         <p className="apple-subheadline mb-4">
-                            Full Stack Developer & Tech Blogger
+                            Aspiring AI/ML Engineer & Student
                         </p>
                         
                         <p className="apple-body-large mb-12 max-w-2xl mx-auto">
-                            Building dreamlike digital experiences that blend retro-futurism with modern technology.
-                            Crafting pixel-perfect interfaces across the cosmos.
+                            Building intelligent AI systems with expertise in Machine Learning, Deep Learning, and Generative AI.
+                            Bridging research with real-world applications.
                         </p>
                         
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -762,8 +776,10 @@
         // About Section
         const About = () => {
             const skills = [
-                "React", "TypeScript", "Node.js", "Python", "Tailwind CSS",
-                "Next.js", "MongoDB", "PostgreSQL", "AWS", "Docker"
+                "Python", "C++", "Machine Learning", "Deep Learning", "Generative AI",
+                "Computer Vision", "NLP", "CNNs", "Graph Neural Networks",
+                "HTML/CSS/JavaScript", "SQL", "Pandas", "REST APIs",
+                "GitHub", "Jupyter", "Figma", "UI/UX Design"
             ];
             
             return (
@@ -787,13 +803,14 @@
                                     transition={{ duration: 0.6, delay: 0.2 }}
                                 >
                                     <p className="apple-body-large mb-6">
-                                        I'm a passionate developer who loves creating unique digital experiences. 
-                                        My work combines technical precision with creative vision, always pushing 
-                                        the boundaries of what's possible on the web.
+                                        I'm currently pursuing a B.Tech in Artificial Intelligence and Data Science at JECRC University. 
+                                        My academic and personal projects are focused on developing expertise in Machine Learning, Deep Learning, 
+                                        and Generative AI, with the long-term goal of becoming a full-stack AI/ML Engineer.
                                     </p>
                                     <p className="apple-body-large">
-                                        When I'm not coding, you'll find me exploring new technologies, contributing 
-                                        to open source, or designing pixel art in my spare time.
+                                        I'm actively building strong foundations in Python, data handling, and model development, while exploring 
+                                        advanced areas like LLMs, MLOps, and AI deployment pipelines. I'm passionate about creating scalable, 
+                                        production-ready AI systems and contributing to projects that bridge research with real-world applications.
                                     </p>
                                 </motion.div>
                                 
