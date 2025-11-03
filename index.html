@@ -496,11 +496,11 @@
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 
-                const stars = Array.from({ length: 150 }, () => ({
+                const stars = Array.from({ length: 500 }, () => ({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 2,
-                    speed: Math.random() * 0.3 + 0.1,
+                    radius: Math.random() * 1.5,
+                    speed: Math.random() * 0.5 + 0.1,
                     opacity: Math.random() * 0.8 + 0.2,
                 }));
                 
@@ -516,7 +516,7 @@
                         
                         ctx.beginPath();
                         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(245, 237, 227, ${star.opacity})`;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
                         ctx.fill();
                     });
                     
@@ -570,9 +570,14 @@
                 <motion.nav
                     initial={{ y: -100 }}
                     animate={{ y: 0 }}
-                    className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-                        scrolled ? 'bg-space-900/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
-                    }`}
+                    className="fixed top-0 w-full z-50 transition-all duration-300"
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        backdropFilter: 'blur(20px)',
+                        WebkitBackdropFilter: 'blur(20px)',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
+                        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)'
+                    }}
                 >
                     <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
                         <motion.div
