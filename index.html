@@ -20,12 +20,6 @@
     <!-- Babel Standalone for JSX/TSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <!-- Tubes Cursor Library -->
-    <script type="module">
-        import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
-        window.TubesCursor = TubesCursor;
-    </script>
-    
     <!-- Custom Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -71,14 +65,79 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Apple-style fonts + Playfair Display for elegant serif titles -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Press+Start+2P&family=Playfair+Display:ital,wght@1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Apple-style fonts + Playfair Display for elegant serif titles + Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Press+Start+2P&family=Playfair+Display:ital,wght@1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        /* Text Selection Effect with Mix Blend Mode */
+        ::selection {
+            background: #f5f5f7;
+            color: #000000;
+            mix-blend-mode: difference;
+        }
+        
+        ::-moz-selection {
+            background: #f5f5f7;
+            color: #000000;
+            mix-blend-mode: difference;
+        }
+        
+        /* Rainbow Text Animation */
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #9400d3; }
+            100% { color: #ff0000; }
+        }
+        
+        .rainbow-text {
+            animation: rainbow 3s linear infinite;
+            font-weight: 600;
+        }
+        
+        /* Custom Scrollbar with Animated Gradient */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #000000;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff6b35, #f7931e, #ffd700, #ff1493, #9400d3);
+            background-size: 100% 400%;
+            border-radius: 10px;
+            border: 2px solid #000000;
+            animation: scrollbarGradient 3s ease infinite;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ff1493, #9400d3, #4b0082, #ff6b35, #ffd700);
+            background-size: 100% 400%;
+        }
+        
+        @keyframes scrollbarGradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #ff6b35 #000000;
         }
         
         body {
@@ -202,6 +261,13 @@
             background-clip: text;
             font-weight: 700;
             letter-spacing: -0.02em;
+        }
+        
+        /* Transparent text with stroke to see stars through */
+        .transparent-hero-text {
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 2px #f5f5f7;
+            paint-order: stroke fill;
         }
         
         .card-glow {
@@ -572,17 +638,17 @@
                     animate={{ y: 0 }}
                     className="fixed top-0 w-full z-50 transition-all duration-300"
                     style={{
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        backdropFilter: 'blur(20px)',
-                        WebkitBackdropFilter: 'blur(20px)',
-                        borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
-                        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)'
+                        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%)',
+                        backdropFilter: 'blur(30px) saturate(150%)',
+                        WebkitBackdropFilter: 'blur(30px) saturate(150%)',
+                        boxShadow: '0 -8px 40px 0 rgba(255, 255, 255, 0.15), 0 0 60px 0 rgba(255, 255, 255, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.2)'
                     }}
                 >
                     <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             className="cursor-pointer"
+                            style={{ marginLeft: '-20px' }}
                         >
                             <img 
                                 src="assests/signature.png" 
@@ -602,8 +668,8 @@
                                     href={`#${item.toLowerCase()}`}
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="hover:text-cosmic-orange transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-cosmic-pink rounded-md px-2 py-1 apple-body"
-                                    style={{ color: '#f5f5f7' }}
+                                    className={`hover:text-cosmic-orange transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-cosmic-pink rounded-md px-2 py-1 apple-body ${scrolled ? 'rainbow-text' : ''}`}
+                                    style={{ color: scrolled ? undefined : '#f5f5f7' }}
                                 >
                                     {item}
                                 </motion.a>
@@ -643,81 +709,16 @@
         
         // Hero Section
         const Hero = () => {
-            const canvasRef = useRef(null);
-            const heroSectionRef = useRef(null);
-            const tubesAppRef = useRef(null);
             const { scrollY } = useScroll();
             const y = useTransform(scrollY, [0, 800], [0, 200]);
             const opacity = useTransform(scrollY, [0, 1000], [1, 1]); // Stays fully visible
             const scale = useTransform(scrollY, [0, 800], [1, 0.9]);
             const width = useTransform(scrollY, [0, 800], ["100%", "90%"]);
             
-            // Initialize Tubes Cursor effect for hero section only
-            useEffect(() => {
-                if (!canvasRef.current || typeof window.TubesCursor === 'undefined') return;
-                
-                // Wait a bit for the library to fully load
-                const initTimer = setTimeout(() => {
-                    try {
-                        // Customize tube colors here - matches your theme
-                        tubesAppRef.current = window.TubesCursor(canvasRef.current, {
-                            tubes: {
-                                colors: ["#FF7A18", "#FF3E6C", "#5CE1E6"], // Orange, Pink, Cyan (your theme colors)
-                                lights: {
-                                    intensity: 200,
-                                    colors: ["#FF7A18", "#FF3E6C", "#5CE1E6", "#B8FF5C"] // Theme color lights
-                                }
-                            }
-                        });
-                        
-                        // Optional: Change colors on click within hero section
-                        const handleHeroClick = () => {
-                            if (tubesAppRef.current) {
-                                // Cycle through your theme colors
-                                const themeColors = [
-                                    ["#FF7A18", "#FF3E6C", "#5CE1E6"], // Default
-                                    ["#FF3E6C", "#5CE1E6", "#B8FF5C"], // Variant 1
-                                    ["#5CE1E6", "#FF7A18", "#FF3E6C"], // Variant 2
-                                ];
-                                const randomSet = themeColors[Math.floor(Math.random() * themeColors.length)];
-                                tubesAppRef.current.tubes.setColors(randomSet);
-                            }
-                        };
-                        
-                        if (heroSectionRef.current) {
-                            heroSectionRef.current.addEventListener('click', handleHeroClick);
-                        }
-                        
-                        return () => {
-                            if (heroSectionRef.current) {
-                                heroSectionRef.current.removeEventListener('click', handleHeroClick);
-                            }
-                        };
-                    } catch (error) {
-                        console.log('Tubes Cursor initialization skipped:', error);
-                    }
-                }, 1000);
-                
-                return () => {
-                    clearTimeout(initTimer);
-                    if (tubesAppRef.current && tubesAppRef.current.dispose) {
-                        tubesAppRef.current.dispose();
-                    }
-                };
-            }, []);
-            
             return (
                 <section 
-                    ref={heroSectionRef}
                     className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden"
                 >
-                    {/* Tubes Cursor Canvas - Only for Hero Section */}
-                    <motion.canvas 
-                        ref={canvasRef}
-                        id="hero-canvas"
-                        style={{ scale, opacity }}
-                    />
-                    
                     <motion.div 
                         className="max-w-4xl mx-auto text-center hero-content-layer"
                         style={{ y, opacity, scale, width }}
@@ -728,23 +729,32 @@
                             transition={{ duration: 0.8 }}
                         >
                         
-                        {/* Name with elegant serif font */}
+                        {/* Name with Montserrat font and blend effect */}
                         <h1 className="mb-6" style={{ 
-                            fontFamily: "'Playfair Display', serif",
+                            fontFamily: "'Montserrat', sans-serif",
                             fontSize: 'clamp(56px, 10vw, 120px)',
-                            fontWeight: 300,
-                            fontStyle: 'italic',
+                            fontWeight: 900,
+                            fontStyle: 'normal',
                             color: '#f5f5f7',
-                            letterSpacing: '-0.01em',
-                            lineHeight: 1.1,
+                            letterSpacing: '0em',
+                            lineHeight: '1em',
                             whiteSpace: 'nowrap',
-                            opacity: 0.9
+                            mixBlendMode: 'difference',
+                            position: 'relative',
+                            zIndex: 2,
+                            marginLeft: '-100px'
                         }}>
                             Harshit Vaishnav
                         </h1>
                         
-                        <p className="apple-subheadline mb-4">
-                            Aspiring AI/ML Engineer & Student
+                        <p className="mb-4" style={{
+                            fontFamily: "'Playfair Display', serif",
+                            fontStyle: 'italic',
+                            fontWeight: 600,
+                            fontSize: 'clamp(18px, 2.5vw, 24px)',
+                            color: '#f5f5f7'
+                        }}>
+                            ✨ Aspiring AI/ML Engineer & Student ✨
                         </p>
                         
                         <p className="apple-body-large mb-12 max-w-2xl mx-auto">
@@ -760,25 +770,6 @@
                                 Get In Touch
                             </GradientButton>
                         </div>
-                        
-                        {/* Animated scroll indicator */}
-                        <motion.div
-                            animate={{ y: [0, 10, 0] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                            className="mt-16 cursor-pointer"
-                            onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
-                        >
-                            <div className="flex flex-col items-center gap-2">
-                                <span className="apple-caption" style={{ color: '#a1a1a6' }}>Scroll to explore</span>
-                                <div className="w-6 h-10 border-2 border-cosmic-orange/50 rounded-full flex justify-center p-2">
-                                    <motion.div
-                                        animate={{ y: [0, 12, 0] }}
-                                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                                        className="w-1.5 h-1.5 bg-cosmic-orange rounded-full"
-                                    />
-                                </div>
-                            </div>
-                        </motion.div>
                     </motion.div>
                 </motion.div>
             </section>
@@ -786,14 +777,8 @@
         };
         
         // About Section
+        // About Me Section
         const About = () => {
-            const skills = [
-                "Python", "C++", "Machine Learning", "Deep Learning", "Generative AI",
-                "Computer Vision", "NLP", "CNNs", "Graph Neural Networks",
-                "HTML/CSS/JavaScript", "SQL", "Pandas", "REST APIs",
-                "GitHub", "Jupyter", "Figma", "UI/UX Design"
-            ];
-            
             return (
                 <section id="about" className="min-h-screen py-20 px-6">
                     <div className="max-w-6xl mx-auto">
@@ -807,52 +792,263 @@
                                 About Me
                             </h2>
                             
-                            <div className="grid md:grid-cols-2 gap-12 items-center">
-                                <motion.div
-                                    initial={{ opacity: 0, x: -50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
-                                >
-                                    <p className="apple-body-large mb-6">
-                                        I'm currently pursuing a B.Tech in Artificial Intelligence and Data Science at JECRC University. 
-                                        My academic and personal projects are focused on developing expertise in Machine Learning, Deep Learning, 
-                                        and Generative AI, with the long-term goal of becoming a full-stack AI/ML Engineer.
-                                    </p>
-                                    <p className="apple-body-large">
-                                        I'm actively building strong foundations in Python, data handling, and model development, while exploring 
-                                        advanced areas like LLMs, MLOps, and AI deployment pipelines. I'm passionate about creating scalable, 
-                                        production-ready AI systems and contributing to projects that bridge research with real-world applications.
-                                    </p>
-                                </motion.div>
-                                
-                                <motion.div
-                                    initial={{ opacity: 0, x: 50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: 0.4 }}
-                                >
-                                    <h3 className="text-2xl font-apple font-semibold mb-6 text-cosmic-orange" style={{ fontSize: '28px', fontWeight: 600, letterSpacing: '-0.01em' }}>
-                                        Skills & Technologies
-                                    </h3>
-                                    <div className="flex flex-wrap gap-3">
-                                        {skills.map((skill, index) => (
-                                            <motion.span
-                                                key={skill}
-                                                initial={{ opacity: 0, scale: 0 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 0.3, delay: index * 0.05 }}
-                                                whileHover={{ scale: 1.1 }}
-                                                className="px-4 py-2 bg-space-800/60 border border-pixel-cyan/30 rounded-lg font-medium hover:border-pixel-cyan hover:shadow-glow-cyan transition-all cursor-default apple-body"
-                                                style={{ fontSize: '15px', fontWeight: 500, color: '#f5f5f7' }}
-                                            >
-                                                {skill}
-                                            </motion.span>
-                                        ))}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="card-glow rounded-3xl overflow-hidden"
+                                style={{
+                                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%)',
+                                    backdropFilter: 'blur(20px)',
+                                    border: '2px solid rgba(255, 255, 255, 0.3)'
+                                }}
+                            >
+                                <div className="grid md:grid-cols-2 gap-0">
+                                    {/* Image Side */}
+                                    <div className="relative h-full min-h-[400px] md:min-h-[500px] overflow-hidden">
+                                        <div 
+                                            className="absolute inset-0"
+                                            style={{
+                                                backgroundImage: 'url(assests/profile.jpg)',
+                                                backgroundSize: 'cover',
+                                                backgroundPosition: 'center',
+                                                filter: 'grayscale(20%) contrast(1.1)'
+                                            }}
+                                        />
+                                        {/* Subtle overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-transparent" />
                                     </div>
-                                </motion.div>
-                            </div>
+                                    
+                                    {/* Text Side */}
+                                    <div className="p-8 md:p-12 flex flex-col justify-center" style={{ background: 'rgba(0, 0, 0, 0.4)' }}>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: 20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.6, delay: 0.4 }}
+                                        >
+                                            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ 
+                                                color: '#f5f5f7',
+                                                fontWeight: 700,
+                                                letterSpacing: '-0.02em'
+                                            }}>
+                                                Bring your creativity to life
+                                            </h3>
+                                            
+                                            <p className="apple-body-large mb-6" style={{ fontSize: '18px', lineHeight: '1.6', color: '#f5f5f7' }}>
+                                                I'm currently pursuing a B.Tech in Artificial Intelligence and Data Science at JECRC University. 
+                                                My academic and personal projects are focused on developing expertise in Machine Learning, Deep Learning, 
+                                                and Generative AI, with the long-term goal of becoming a full-stack AI/ML Engineer.
+                                            </p>
+                                            <p className="apple-body-large mb-8" style={{ fontSize: '18px', lineHeight: '1.6', color: '#f5f5f7' }}>
+                                                I'm actively building strong foundations in Python, data handling, and model development, while exploring 
+                                                advanced areas like LLMs, MLOps, and AI deployment pipelines. I'm passionate about creating scalable, 
+                                                production-ready AI systems and contributing to projects that bridge research with real-world applications.
+                                            </p>
+                                            
+                                            <motion.button
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                                                className="px-8 py-4 rounded-full font-semibold transition-all duration-200 flex items-center gap-2"
+                                                style={{
+                                                    background: 'rgba(255, 255, 255, 0.1)',
+                                                    color: '#f5f5f7',
+                                                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                                                    fontSize: '16px',
+                                                    fontWeight: 600
+                                                }}
+                                            >
+                                                <span>✨</span>
+                                                <span>Get In Touch</span>
+                                            </motion.button>
+                                        </motion.div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Skills Section
+        const Skills = () => {
+            const skills = [
+                { name: "Python", icon: "🐍" },
+                { name: "C++", icon: "⚡" },
+                { name: "Machine Learning", icon: "🤖" },
+                { name: "Deep Learning", icon: "🧠" },
+                { name: "Generative AI", icon: "✨" },
+                { name: "Computer Vision", icon: "👁️" },
+                { name: "NLP", icon: "💬" },
+                { name: "CNNs", icon: "🔗" },
+                { name: "Graph Neural Networks", icon: "📊" },
+                { name: "HTML/CSS/JavaScript", icon: "🌐" },
+                { name: "SQL", icon: "💾" },
+                { name: "Pandas", icon: "🐼" },
+                { name: "REST APIs", icon: "🔌" },
+                { name: "GitHub", icon: "📁" },
+                { name: "Jupyter", icon: "📓" },
+                { name: "Figma", icon: "🎨" },
+                { name: "UI/UX Design", icon: "✏️" }
+            ];
+            
+            return (
+                <section id="skills" className="min-h-screen py-20 px-6 bg-gradient-to-b from-transparent to-space-800/20">
+                    <div className="max-w-6xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="apple-headline text-center mb-12" style={{ color: '#f5f5f7' }}>
+                                Skills & Technologies
+                            </h2>
+                            
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="max-w-5xl mx-auto"
+                            >
+                                {/* macOS Browser Window */}
+                                <div className="rounded-xl overflow-hidden shadow-2xl" style={{
+                                    background: '#f5e6d3',
+                                    border: '1px solid rgba(0, 0, 0, 0.1)'
+                                }}>
+                                    {/* Browser Header */}
+                                    <div className="flex items-center justify-between px-4 py-3" style={{
+                                        background: 'rgba(255, 255, 255, 0.8)',
+                                        borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
+                                    }}>
+                                        {/* Traffic Lights */}
+                                        <div className="flex gap-2">
+                                            <div style={{
+                                                width: '12px',
+                                                height: '12px',
+                                                borderRadius: '50%',
+                                                background: '#ff5f57'
+                                            }}></div>
+                                            <div style={{
+                                                width: '12px',
+                                                height: '12px',
+                                                borderRadius: '50%',
+                                                background: '#ffbd2e'
+                                            }}></div>
+                                            <div style={{
+                                                width: '12px',
+                                                height: '12px',
+                                                borderRadius: '50%',
+                                                background: '#28c840'
+                                            }}></div>
+                                        </div>
+                                        
+                                        {/* URL Bar */}
+                                        <div className="flex-1 mx-4">
+                                            <div className="px-4 py-1 rounded-md text-sm" style={{
+                                                background: 'rgba(0, 0, 0, 0.05)',
+                                                color: '#000',
+                                                textAlign: 'center',
+                                                fontFamily: 'Inter, sans-serif',
+                                                fontSize: '13px'
+                                            }}>
+                                                skills.portfolio.jpg
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Browser Icons */}
+                                        <div className="flex gap-3" style={{ opacity: 0.4 }}>
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <path d="m21 21-4.35-4.35"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Browser Content */}
+                                    <div className="p-12" style={{
+                                        background: '#f5e6d3',
+                                        minHeight: '400px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <div className="grid grid-cols-3 gap-x-12 gap-y-10 max-w-4xl">
+                                            {skills.map((skill, index) => (
+                                                <motion.div
+                                                    key={skill.name}
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    whileInView={{ opacity: 1, scale: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ 
+                                                        duration: 0.3, 
+                                                        delay: index * 0.05
+                                                    }}
+                                                    className="flex flex-col items-center justify-center gap-3"
+                                                >
+                                                    {/* Pixelated Badge */}
+                                                    <div style={{
+                                                        width: '64px',
+                                                        height: '64px',
+                                                        background: 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)',
+                                                        borderRadius: '8px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        fontSize: '32px',
+                                                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                        imageRendering: 'pixelated',
+                                                        position: 'relative',
+                                                        overflow: 'hidden'
+                                                    }}>
+                                                        {/* Pixelated overlay effect */}
+                                                        <div style={{
+                                                            position: 'absolute',
+                                                            inset: 0,
+                                                            background: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.1) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.1) 3px)',
+                                                            pointerEvents: 'none'
+                                                        }}></div>
+                                                        <span style={{ position: 'relative', zIndex: 1 }}>{skill.icon}</span>
+                                                    </div>
+                                                    
+                                                    {/* Skill Name */}
+                                                    <div style={{
+                                                        fontSize: '13px',
+                                                        fontWeight: 500,
+                                                        color: '#000',
+                                                        textAlign: 'center',
+                                                        fontFamily: 'Inter, sans-serif',
+                                                        maxWidth: '120px'
+                                                    }}>
+                                                        {skill.name}
+                                                    </div>
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Instagram watermark */}
+                                    <div className="text-center pb-6">
+                                        <div style={{
+                                            display: 'inline-block',
+                                            border: '2px solid #000',
+                                            borderRadius: '20px',
+                                            padding: '6px 16px',
+                                            fontSize: '12px',
+                                            fontWeight: 600,
+                                            color: '#000',
+                                            background: 'transparent',
+                                            letterSpacing: '0.5px'
+                                        }}>
+                                            INSTAGRAM
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
                         </motion.div>
                     </div>
                 </section>
@@ -1618,6 +1814,7 @@
                     <main>
                         <Hero />
                         <About />
+                        <Skills />
                         <Projects />
                         <Blog />
                         <Activity />
