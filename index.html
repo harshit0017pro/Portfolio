@@ -3,84 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio - Dreamlike retro-futuristic developer portfolio">
-    <meta property="og:title" content="Portfolio - Developer">
-    <meta property="og:description" content="Dreamlike retro-futuristic portfolio">
-    <meta property="og:type" content="website">
-    <title>Portfolio - Developer</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <title>Welcome - Harshit Vaishnav</title>
     
     <!-- React, ReactDOM, Framer Motion -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.js"></script>
     
-    <!-- Babel Standalone for JSX/TSX -->
+    <!-- Babel Standalone for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- GSAP + ScrollTrigger + Lenis for smooth scrolling -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/SplitText.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.38/bundled/lenis.min.js"></script>
-    
-    <!-- Custom Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        space: {
-                            900: '#000000',
-                            800: '#0a0a0a',
-                            700: '#050505',
-                        },
-                        cosmic: {
-                            orange: '#FF7A18',
-                            pink: '#FF3E6C',
-                            red: '#FF4D5A',
-                            coral: '#FF6F61',
-                        },
-                        cream: {
-                            100: '#F5EDE3',
-                            200: '#EAE2D6',
-                        },
-                        pixel: {
-                            cyan: '#5CE1E6',
-                            mint: '#B8FF5C',
-                        }
-                    },
-                    fontFamily: {
-                        'space': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        'pixel': ['"Press Start 2P"', 'monospace'],
-                        'body': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        'apple': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'glow': '0 0 20px rgba(255, 122, 24, 0.5)',
-                        'glow-pink': '0 0 20px rgba(255, 62, 108, 0.5)',
-                        'glow-cyan': '0 0 15px rgba(92, 225, 230, 0.6)',
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Apple-style fonts + Playfair Display for elegant serif titles + Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Press+Start+2P&family=Playfair+Display:ital,wght@1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -89,909 +20,231 @@
             box-sizing: border-box;
         }
         
-        /* Text Selection Effect with Mix Blend Mode */
-        ::selection {
-            background: #f5f5f7;
-            color: #000000;
-            mix-blend-mode: difference;
-        }
-        
-        ::-moz-selection {
-            background: #f5f5f7;
-            color: #000000;
-            mix-blend-mode: difference;
-        }
-        
-        /* Rainbow Text Animation */
-        @keyframes rainbow {
-            0% { color: #ff0000; }
-            14% { color: #ff7f00; }
-            28% { color: #ffff00; }
-            42% { color: #00ff00; }
-            57% { color: #0000ff; }
-            71% { color: #4b0082; }
-            85% { color: #9400d3; }
-            100% { color: #ff0000; }
-        }
-        
-        .rainbow-text {
-            animation: rainbow 3s linear infinite;
-            font-weight: 600;
-        }
-        
-        /* Custom Scrollbar with Animated Gradient */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #000000;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #ff6b35, #f7931e, #ffd700, #ff1493, #9400d3);
-            background-size: 100% 400%;
-            border-radius: 10px;
-            border: 2px solid #000000;
-            animation: scrollbarGradient 3s ease infinite;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #ff1493, #9400d3, #4b0082, #ff6b35, #ffd700);
-            background-size: 100% 400%;
-        }
-        
-        @keyframes scrollbarGradient {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 0% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-        
-        /* Firefox */
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: #ff6b35 #000000;
-        }
-        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(to bottom, #000000, #0a0a0a, #050505);
-            color: #f5f5f7;
-            overflow-x: hidden;
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            scroll-behavior: smooth;
-            /* Performance optimizations */
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            perspective: 1000px;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow: hidden;
         }
         
-        /* Smooth section transitions */
-        section {
-            position: relative;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-        }
-        
-        /* Fade effect between sections */
-        section::before {
-            content: '';
-            position: absolute;
-            top: -100px;
+        /* Cinematic Intro Sequence Styles */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+        
+        .intro-overlay.hidden {
             pointer-events: none;
-            z-index: 1;
         }
         
-        section:first-of-type::before {
-            display: none;
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-        
-        /* Apple-style Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.02em; /* Apple's tight tracking */
-            color: #f5f5f7;
-            line-height: 1.0834933333; /* Apple's precise line height */
-        }
-        
-        p, span, a, div {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            letter-spacing: -0.005em;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        /* Apple heading sizes and colors */
-        .apple-headline {
-            font-size: clamp(48px, 5vw, 96px);
-            font-weight: 700;
-            line-height: 1.05;
-            letter-spacing: -0.015em;
-            color: #f5f5f7; /* Apple white */
-        }
-        
-        .apple-subheadline {
-            font-size: clamp(21px, 2.5vw, 28px);
-            font-weight: 400;
-            line-height: 1.2857342857;
-            letter-spacing: 0.007em;
-            color: #a1a1a6; /* Apple gray */
-        }
-        
-        .apple-body {
-            font-size: 17px;
-            font-weight: 400;
-            line-height: 1.4705882353;
-            letter-spacing: -0.022em;
-            color: #a1a1a6;
-        }
-        
-        .apple-body-large {
-            font-size: 21px;
-            font-weight: 400;
-            line-height: 1.381002381;
-            letter-spacing: 0.011em;
-            color: #a1a1a6;
-        }
-        
-        .apple-caption {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.4285914286;
-            letter-spacing: -0.016em;
-            color: #86868b; /* Apple lighter gray */
-        }
-        
-        .apple-link {
-            color: #2997ff; /* Apple blue */
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.3s ease;
-        }
-        
-        .apple-link:hover {
-            color: #147ce5;
-            text-decoration: underline;
-        }
-        
-        /* Enhance existing gradient text for Apple style */
-        .gradient-text {
-            background: linear-gradient(135deg, #FF7A18 0%, #FF3E6C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        /* Transparent text with stroke to see stars through */
-        .transparent-hero-text {
-            -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 2px #f5f5f7;
-            paint-order: stroke fill;
-        }
-        
-        .card-glow {
-            background: rgba(10, 10, 10, 0.6);
-            border: 1px solid rgba(255, 122, 24, 0.3);
-            box-shadow: 0 0 20px rgba(255, 122, 24, 0.2);
+        .intro-skip-button {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
         
-        .card-glow:hover {
-            border-color: rgba(255, 62, 108, 0.5);
-            box-shadow: 0 0 30px rgba(255, 62, 108, 0.3);
+        .intro-skip-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
         }
         
-        .pixel-border {
-            image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
-            image-rendering: crisp-edges;
-        }
-        
-        .starfield-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background: linear-gradient(to bottom, #000000, #0a0a0a, #050505);
-            overflow: hidden;
-        }
-        
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle linear infinite;
-            /* GPU acceleration */
-            transform: translateZ(0);
-            will-change: opacity;
-            /* Enhanced star glow effect - more intense */
-            box-shadow: 
-                0 0 4px #fff,
-                0 0 8px #fff,
-                0 0 12px #fff,
-                0 0 16px rgba(255, 255, 255, 0.8),
-                0 0 20px rgba(255, 255, 255, 0.6);
-        }
-        
-        /* Larger stars with even more intense glow */
-        .star.large {
-            box-shadow: 
-                0 0 6px #fff,
-                0 0 12px #fff,
-                0 0 18px #fff,
-                0 0 24px rgba(255, 255, 255, 0.9),
-                0 0 32px rgba(255, 255, 255, 0.7),
-                0 0 40px rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Four-point star sparkle effect - brighter */
-        .star::before,
-        .star::after {
-            content: '';
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            top: 50%;
-            left: 50%;
-            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
-        }
-        
-        .star::before {
-            width: 150%;
-            height: 1px;
-            transform: translate(-50%, -50%);
-        }
-        
-        .star::after {
-            width: 1px;
-            height: 150%;
-            transform: translate(-50%, -50%);
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* Pixel Dante Character - Sitting on About Card */
-        .pixel-dante {
-            position: absolute;
-            top: -200px;  /* Adjusted down slightly */
-            right: 50px; /* Positioned on the right side */
-            width: 350px;  /* Increased from 300px */
-            height: 350px;  /* Increased from 300px */
-            z-index: 10;
-            pointer-events: none;
-            transform: translateZ(0);
-        }
-        
-        .pixel-dante img,
-        .pixel-dante video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
-            image-rendering: crisp-edges;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .pixel-dante {
-                top: -115px;  /* Adjusted down slightly for mobile */
-                right: 20px;
-                width: 180px;
-                height: 180px;
-            }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 122, 24, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(255, 62, 108, 0.5); }
-        }
-        
-        .pulse-glow {
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #000000;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #FF7A18, #FF3E6C);
-            border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #FF3E6C, #FF4D5A);
-        }
-        
-        /* Tubes Cursor Canvas */
-        #hero-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            will-change: transform, opacity;
-        }
-        
-        /* Ensure hero content is above canvas */
-        .hero-content-layer {
-            position: relative;
-            z-index: 2;
-            will-change: transform, opacity, width;
-        }
-        
-        /* Optimize all motion elements */
-        section, motion-div {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Experience Slides Styles */
-        .exp-slides-nav {
-            z-index: 99;
-            position: fixed;
-            right: 2%;
-            display: flex;
-            align-items: center;
-            height: 100%;
-            color: #f5f5f7;
-        }
-        
-        .exp-slides-nav__nav {
-            position: relative;
-            right: 0;
-            display: block;
-            font-size: 1em;
-            transform: rotate(90deg);
-            transform-origin: center;
-        }
-        
-        .exp-slides-nav button {
-            position: relative;
-            display: inline-block;
-            padding: 0.35em;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            appearance: none;
-            background: transparent;
-            border: 0;
-            color: #f5f5f7;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            overflow-x: hidden;
-            transition: color 0.5s ease;
-        }
-        
-        .exp-slides-nav button:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            height: 1px;
-            width: 0;
-            background: #f5f5f7;
-            transition: width 0.4s ease;
-        }
-        
-        .exp-slides-nav button:hover {
-            cursor: pointer;
-            color: rgba(245, 245, 247, 0.75);
-            transition: color 0.5s ease;
-        }
-        
-        .exp-slides-nav button:hover:after {
-            width: 100%;
-            transition: width 0.4s ease;
-        }
-        
-        .exp-slides-nav button:focus {
-            outline: 0;
-        }
-        
-        .exp-slides.is-sliding .exp-slides-nav {
-            pointer-events: none;
-        }
-        
-        .exp-slides {
-            position: relative;
-            display: block;
-            height: 100vh;
-            width: 100%;
-            background: transparent;
-            overflow: hidden;
-        }
-        
-        .exp-slide {
-            z-index: -1;
-            padding: 0;
-            position: absolute;
-            width: 100%;
-            height: 100vh;
-            transition: z-index 1s ease;
-        }
-        
-        .exp-slide.is-active {
-            z-index: 19;
-            transition: z-index 1s ease;
-        }
-        
-        .exp-slide__content {
-            position: relative;
-            margin: 0 auto;
-            height: 95%;
-            width: 95%;
-            top: 2.5%;
-            border-radius: 24px;
-            overflow: hidden;
-        }
-        
-        @media (min-width: 54em) {
-            .exp-slide__content {
-                height: 80%;
-                width: 80%;
-                top: 10%;
-            }
-        }
-        
-        .exp-slide__header {
-            z-index: 9;
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            overflow-y: hidden;
-        }
-        
-        .exp-slide__title .title-line {
-            display: block;
-            overflow-y: hidden;
-        }
-        
-        .exp-slide__title .title-line span {
-            display: inline-block;
-            transform: translate3d(0, 140%, 0);
-            opacity: 0;
-            transition: transform 0.4s ease, opacity 0.8s ease;
-        }
-        
-        .exp-slide.is-active .exp-slide__title .title-line span {
-            transform: translate3d(0, 0%, 0);
-            opacity: 1;
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.1s ease;
-        }
-        
-        .exp-slide.is-active .exp-slide__title .title-line:nth-of-type(2n) span {
-            transition-delay: 0.2s;
-        }
-        
-        .exp-slide__figure {
-            z-index: 7;
-            position: absolute;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            height: 100%;
-            width: 100%;
-        }
-        
-        .exp-slide__img {
-            position: relative;
-            display: block;
-            background-size: cover;
-            background-position: 50%;
-            -webkit-backface-visibility: hidden;
-            height: 0%;
-            width: 100%;
-            filter: grayscale(0%);
-            transition: height 1s 1.4s cubic-bezier(0.19, 1, 0.22, 1), filter 0.4s 0.1s ease;
-        }
-        
-        .exp-slide.is-active .exp-slide__img {
-            height: 100%;
-            opacity: 1;
-            transition: height 0.5s 0.3s cubic-bezier(0.77, 0, 0.175, 1), filter 0.4s 0.1s ease;
-        }
-        
-        .exp-slides.is-sliding .exp-slide__img {
-            filter: grayscale(100%);
-        }
-        
-        /* Infinite Carousel Styles */
-        .loop-images {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            background-color: white;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .carousel-track {
-            --left: -300rem;
-            min-width: calc(10rem * var(--total));
-            height: 30rem;
-            position: relative;
-        }
-        
-        .carousel-track .carousel-item {
-            position: absolute;
-            width: 30rem;
-            height: 30rem;
-            left: 100%;
-            display: flex;
-            justify-content: center;
-            perspective: 1000px;
-            transform-style: preserve-3d;
-            animation: scroll-left var(--time) linear infinite;
-            animation-delay: calc(var(--time) / var(--total) * (var(--i) - 1) - var(--time));
-            will-change: left;
-            transition: 0.5s ease-in-out;
-            cursor: pointer;
-        }
-        
-        .carousel-track .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background-color: white;
-            transform: rotateY(-45deg);
-            transition: 0.5s ease-in-out;
-            mask: linear-gradient(black 70%, transparent 100%);
-        }
-        
-        .carousel-track .carousel-item:hover img {
-            transform: rotateY(0deg) translateY(-1rem);
-        }
-        
-        @keyframes scroll-left {
-            to {
-                left: var(--left);
-            }
-        }
-        
-        .scroll-down-indicator {
-            position: absolute;
-            bottom: 5rem;
-            left: 0;
-            right: 0;
-            font-family: 'Poppins', sans-serif;
+        .intro-text-container {
             text-align: center;
-            font-size: 1.6rem;
-            color: black;
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
+        }
+        
+        .intro-text-container.fade-out {
+            opacity: 0;
+        }
+        
+        .intro-content-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-decoration: none;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
         }
         
-        .scroll-down-indicator .arrow {
-            margin-top: 0.5rem;
-            animation: bounce 2s infinite;
+        .intro-text-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            min-height: 120px;
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+        .intro-typed-text {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #f5f5f7;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .intro-name-text {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #f5f5f7;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .intro-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: #ffffff;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
+        
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+        
+        .choice-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 0 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .choice-container.show {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
                 transform: translateY(0);
             }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
         }
         
-        /* 3D Rotating Image Section */
-        .image-motion-section {
+        .choice-card {
             position: relative;
-            height: auto;
-            min-height: 100vh;
             width: 100%;
-            background-color: black;
+            max-width: 400px;
+            min-width: 300px;
+            height: 500px;
             overflow: hidden;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            background: #222;
         }
         
-        .image-motion {
-            width: 100%;
-            height: 100vh;
-            border-radius: inherit;
-            object-position: center;
-            transform: rotatex(90deg);
-            transform-origin: 50% 0;
+        .choice-card:hover {
+            transform: scale(1.05) translateY(-8px);
         }
         
-        .image-motion picture {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .image-motion img {
+        .choice-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            background-color: white;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
         }
         
-        /* Color Spectrum Scroll Effect */
-        .spectrum-scroll-section {
-            height: 100vh;
-            position: relative;
-            background-color: #000000;
-            overflow: hidden;
+        .choice-card:hover img {
+            transform: scale(1.15);
         }
         
-        .spectrum-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        .spectrum-svg-container {
+        .choice-overlay {
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 100vh;
-            transform-origin: bottom;
-            transform: scaleY(0.05) translateY(100vh);
-            opacity: 0;
-            z-index: 15;
-            will-change: transform, opacity;
-        }
-        
-        .spectrum-svg {
             width: 100%;
             height: 100%;
-        }
-        
-        .spectrum-text-grid {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            display: grid;
-            grid-template-columns: repeat(9, 1fr);
-            align-items: end;
-            z-index: 20;
-            opacity: 0;
-        }
-        
-        .spectrum-text-column {
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            height: 100%;
-            padding-bottom: 2rem;
-        }
-        
-        .spectrum-label {
-            color: #f5f5f7;
-            font-size: 12px;
-            text-align: center;
-            margin-bottom: 1rem;
-            display: inline-block;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .spectrum-main-title {
-            position: absolute;
-            bottom: 50%;
-            left: 50%;
-            transform: translate(-50%, 50%);
-            text-align: center;
-            color: #f5f5f7;
-            font-size: 14px;
-            line-height: 1.6;
-            z-index: 20;
+            padding: 2rem;
             opacity: 0;
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            transition: opacity 0.4s ease;
         }
         
-        .split-text {
-            overflow: visible;
-        }
-        
-        /* Expandable Card Slider Styles */
-        .game-section {
-            padding: 60px 20px;
-            overflow: hidden;
-        }
-        
-        .game-section .owl-stage {
-            margin: 15px 0;
-            display: flex;
-            display: -webkit-flex;
-        }
-        
-        .game-section .item {
-            margin: 0 15px 60px;
-            width: 320px;
-            height: 400px;
-            display: flex;
-            display: -webkit-flex;
-            align-items: flex-end;
-            -webkit-align-items: flex-end;
-            background: #343434 no-repeat center center / cover;
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.4s ease-in-out;
-            -webkit-transition: all 0.4s ease-in-out;
-            cursor: pointer;
-        }
-        
-        .game-section .item.active {
-            width: 500px;
-            box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
-            -webkit-box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
-        }
-        
-        .game-section .item:after {
-            content: "";
-            display: block;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-            background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-        }
-        
-        .game-section .item-desc {
-            padding: 0 24px 12px;
-            color: #fff;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            transform: translateY(calc(100% - 54px));
-            -webkit-transform: translateY(calc(100% - 54px));
-            transition: all 0.4s ease-in-out;
-            -webkit-transition: all 0.4s ease-in-out;
-        }
-        
-        .game-section .item.active .item-desc {
-            transform: none;
-            -webkit-transform: none;
-        }
-        
-        .game-section .item-desc p {
-            opacity: 0;
-            -webkit-transform: translateY(32px);
-            transform: translateY(32px);
-            transition: all 0.4s ease-in-out 0.2s;
-            -webkit-transition: all 0.4s ease-in-out 0.2s;
-        }
-        
-        .game-section .item.active .item-desc p {
+        .choice-card:hover .choice-overlay {
             opacity: 1;
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
         }
         
-        .game-section .owl-theme.custom-carousel .owl-dots {
-            margin-top: -20px;
-            position: relative;
-            z-index: 5;
+        .choice-label {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
         }
         
-        .game-section .item-desc h3 {
-            margin: 0 0 10px;
-            font-size: 28px;
-            line-height: 36px;
-            color: #fff;
+        .choice-subtitle {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
         }
         
-        .game-section .item-desc p {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #ddd;
-        }
-        
-        /* Responsive styles for card slider */
-        @media (min-width: 992px) and (max-width: 1199px) {
-            .game-section .item {
-                margin: 0 12px 60px;
-                width: 260px;
-                height: 360px;
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .choice-container {
+                flex-direction: column;
+                gap: 1.5rem;
             }
-            .game-section .item.active {
-                width: 400px;
+            
+            .choice-card {
+                max-width: 100%;
+                height: 320px;
             }
-            .game-section .item-desc {
-                transform: translateY(calc(100% - 46px));
-                -webkit-transform: translateY(calc(100% - 46px));
+            
+            .intro-typed-text {
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
             }
-        }
-        
-        @media (min-width: 768px) and (max-width: 991px) {
-            .game-section .item {
-                margin: 0 12px 60px;
-                width: 240px;
-                height: 330px;
-            }
-            .game-section .item.active {
-                width: 360px;
-            }
-            .game-section .item-desc {
-                transform: translateY(calc(100% - 42px));
-                -webkit-transform: translateY(calc(100% - 42px));
-            }
-        }
-        
-        @media (max-width: 767px) {
-            .game-section .item {
-                margin: 0 10px 40px;
-                width: 200px;
-                height: 280px;
-            }
-            .game-section .item.active {
-                width: 270px;
-                box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
-                -webkit-box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
-            }
-            .game-section .item-desc {
-                padding: 0 14px 5px;
-                transform: translateY(calc(100% - 42px));
-                -webkit-transform: translateY(calc(100% - 42px));
-            }
-            .game-section .item-desc h3 {
-                font-size: 19px;
-                line-height: 24px;
+            
+            .choice-label {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -1000,1929 +253,199 @@
     <div id="root"></div>
     
     <script type="text/babel">
-        /* 
-         * PERFORMANCE OPTIMIZATIONS APPLIED:
-         * 1. Cursor: Removed heavy useSpring, using direct CSS transforms with RAF
-         * 2. Starfield: Reduced stars from 500→200, 30fps instead of 60fps, fillRect instead of arc
-         * 3. Lenis: Disabled smoothTouch, reduced durations, proper RAF cleanup
-         * 4. Owl Carousel: Optimized transition speeds
-         * 5. All animations: Using GPU-accelerated transforms, will-change property
-         */
-        
         const { useState, useEffect, useRef } = React;
-        const { motion, useScroll, useTransform, AnimatePresence, useSpring } = Motion;
+        const { motion } = Motion;
         
-        // Pixel Art Icon Component Library
-        const PixelIcons = {
-            home: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="3" y="9" width="18" height="12" fill="currentColor"/>
-                    <rect x="5" y="11" width="4" height="4" fill="#000"/>
-                    <rect x="15" y="11" width="4" height="4" fill="#000"/>
-                    <rect x="10" y="15" width="4" height="6" fill="#000"/>
-                    <rect x="9" y="6" width="6" height="3" fill="currentColor"/>
-                    <rect x="6" y="9" width="3" height="3" fill="currentColor"/>
-                    <rect x="15" y="9" width="3" height="3" fill="currentColor"/>
-                </svg>
-            ),
-            user: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="9" y="5" width="6" height="2" fill="currentColor"/>
-                    <rect x="7" y="7" width="2" height="2" fill="currentColor"/>
-                    <rect x="15" y="7" width="2" height="2" fill="currentColor"/>
-                    <rect x="9" y="7" width="6" height="4" fill="currentColor"/>
-                    <rect x="7" y="9" width="2" height="4" fill="currentColor"/>
-                    <rect x="15" y="9" width="2" height="4" fill="currentColor"/>
-                    <rect x="6" y="13" width="12" height="2" fill="currentColor"/>
-                    <rect x="5" y="15" width="14" height="6" fill="currentColor"/>
-                    <rect x="7" y="17" width="2" height="4" fill="#000"/>
-                    <rect x="15" y="17" width="2" height="4" fill="#000"/>
-                </svg>
-            ),
-            code: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="5" y="8" width="2" height="2" fill="currentColor"/>
-                    <rect x="7" y="10" width="2" height="2" fill="currentColor"/>
-                    <rect x="9" y="12" width="2" height="2" fill="currentColor"/>
-                    <rect x="7" y="14" width="2" height="2" fill="currentColor"/>
-                    <rect x="5" y="16" width="2" height="2" fill="currentColor"/>
-                    <rect x="17" y="8" width="2" height="2" fill="currentColor"/>
-                    <rect x="15" y="10" width="2" height="2" fill="currentColor"/>
-                    <rect x="13" y="12" width="2" height="2" fill="currentColor"/>
-                    <rect x="15" y="14" width="2" height="2" fill="currentColor"/>
-                    <rect x="17" y="16" width="2" height="2" fill="currentColor"/>
-                </svg>
-            ),
-            folder: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="4" y="8" width="6" height="2" fill="currentColor"/>
-                    <rect x="10" y="8" width="10" height="2" fill="currentColor"/>
-                    <rect x="4" y="10" width="16" height="10" fill="currentColor"/>
-                    <rect x="6" y="12" width="12" height="2" fill="#000" opacity="0.3"/>
-                </svg>
-            ),
-            star: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="11" y="4" width="2" height="2" fill="currentColor"/>
-                    <rect x="9" y="6" width="6" height="2" fill="currentColor"/>
-                    <rect x="7" y="8" width="2" height="2" fill="currentColor"/>
-                    <rect x="15" y="8" width="2" height="2" fill="currentColor"/>
-                    <rect x="5" y="10" width="14" height="2" fill="currentColor"/>
-                    <rect x="9" y="12" width="6" height="2" fill="currentColor"/>
-                    <rect x="7" y="14" width="2" height="4" fill="currentColor"/>
-                    <rect x="15" y="14" width="2" height="4" fill="currentColor"/>
-                    <rect x="11" y="14" width="2" height="6" fill="currentColor"/>
-                </svg>
-            ),
-            mail: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="3" y="6" width="18" height="12" fill="currentColor"/>
-                    <rect x="5" y="8" width="2" height="2" fill="#000"/>
-                    <rect x="7" y="10" width="2" height="2" fill="#000"/>
-                    <rect x="9" y="12" width="2" height="2" fill="#000"/>
-                    <rect x="13" y="12" width="2" height="2" fill="#000"/>
-                    <rect x="15" y="10" width="2" height="2" fill="#000"/>
-                    <rect x="17" y="8" width="2" height="2" fill="#000"/>
-                </svg>
-            ),
-            github: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="9" y="4" width="6" height="2" fill="currentColor"/>
-                    <rect x="7" y="6" width="10" height="2" fill="currentColor"/>
-                    <rect x="5" y="8" width="14" height="6" fill="currentColor"/>
-                    <rect x="9" y="10" width="2" height="2" fill="#000"/>
-                    <rect x="13" y="10" width="2" height="2" fill="#000"/>
-                    <rect x="7" y="14" width="4" height="4" fill="currentColor"/>
-                    <rect x="13" y="14" width="4" height="4" fill="currentColor"/>
-                    <rect x="7" y="18" width="2" height="2" fill="currentColor"/>
-                    <rect x="15" y="18" width="2" height="2" fill="currentColor"/>
-                </svg>
-            ),
-            linkedin: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="4" y="4" width="16" height="16" fill="currentColor"/>
-                    <rect x="7" y="7" width="2" height="2" fill="#000"/>
-                    <rect x="7" y="11" width="2" height="6" fill="#000"/>
-                    <rect x="11" y="11" width="2" height="6" fill="#000"/>
-                    <rect x="13" y="11" width="2" height="2" fill="#000"/>
-                    <rect x="13" y="15" width="2" height="2" fill="#000"/>
-                    <rect x="15" y="13" width="2" height="4" fill="#000"/>
-                </svg>
-            ),
-            twitter: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="6" y="6" width="2" height="2" fill="currentColor"/>
-                    <rect x="8" y="8" width="2" height="2" fill="currentColor"/>
-                    <rect x="10" y="10" width="4" height="2" fill="currentColor"/>
-                    <rect x="14" y="8" width="2" height="2" fill="currentColor"/>
-                    <rect x="16" y="6" width="2" height="2" fill="currentColor"/>
-                    <rect x="6" y="12" width="6" height="2" fill="currentColor"/>
-                    <rect x="8" y="14" width="6" height="2" fill="currentColor"/>
-                    <rect x="10" y="16" width="4" height="2" fill="currentColor"/>
-                </svg>
-            ),
-            chart: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="5" y="14" width="3" height="6" fill="currentColor"/>
-                    <rect x="10" y="10" width="3" height="10" fill="currentColor"/>
-                    <rect x="15" y="6" width="3" height="14" fill="currentColor"/>
-                    <rect x="4" y="20" width="16" height="1" fill="currentColor"/>
-                </svg>
-            ),
-            fire: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="11" y="4" width="2" height="2" fill="currentColor"/>
-                    <rect x="9" y="6" width="6" height="2" fill="currentColor"/>
-                    <rect x="7" y="8" width="10" height="4" fill="currentColor"/>
-                    <rect x="8" y="12" width="8" height="4" fill="currentColor"/>
-                    <rect x="10" y="16" width="4" height="2" fill="currentColor"/>
-                    <rect x="11" y="10" width="2" height="2" fill="#000"/>
-                </svg>
-            ),
-            box: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="8" y="5" width="8" height="2" fill="currentColor"/>
-                    <rect x="6" y="7" width="12" height="2" fill="currentColor"/>
-                    <rect x="5" y="9" width="14" height="10" fill="currentColor"/>
-                    <rect x="7" y="11" width="10" height="2" fill="#000" opacity="0.3"/>
-                    <rect x="11" y="7" width="2" height="6" fill="#000" opacity="0.2"/>
-                </svg>
-            ),
-            sparkle: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="11" y="3" width="2" height="4" fill="currentColor"/>
-                    <rect x="11" y="17" width="2" height="4" fill="currentColor"/>
-                    <rect x="3" y="11" width="4" height="2" fill="currentColor"/>
-                    <rect x="17" y="11" width="4" height="2" fill="currentColor"/>
-                    <rect x="6" y="6" width="2" height="2" fill="currentColor"/>
-                    <rect x="16" y="6" width="2" height="2" fill="currentColor"/>
-                    <rect x="6" y="16" width="2" height="2" fill="currentColor"/>
-                    <rect x="16" y="16" width="2" height="2" fill="currentColor"/>
-                    <rect x="10" y="10" width="4" height="4" fill="currentColor"/>
-                </svg>
-            ),
-            blog: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="5" y="4" width="14" height="16" fill="currentColor"/>
-                    <rect x="7" y="6" width="10" height="2" fill="#000"/>
-                    <rect x="7" y="10" width="10" height="1" fill="#000" opacity="0.5"/>
-                    <rect x="7" y="12" width="8" height="1" fill="#000" opacity="0.5"/>
-                    <rect x="7" y="14" width="10" height="1" fill="#000" opacity="0.5"/>
-                    <rect x="7" y="16" width="6" height="1" fill="#000" opacity="0.5"/>
-                </svg>
-            ),
-            pen: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="14" y="4" width="4" height="2" fill="currentColor"/>
-                    <rect x="12" y="6" width="2" height="2" fill="currentColor"/>
-                    <rect x="10" y="8" width="2" height="2" fill="currentColor"/>
-                    <rect x="8" y="10" width="2" height="2" fill="currentColor"/>
-                    <rect x="6" y="12" width="2" height="2" fill="currentColor"/>
-                    <rect x="4" y="14" width="2" height="2" fill="currentColor"/>
-                    <rect x="4" y="16" width="4" height="4" fill="currentColor"/>
-                    <rect x="16" y="6" width="2" height="2" fill="#000"/>
-                </svg>
-            ),
-            link: () => (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="pixel-border">
-                    <rect x="13" y="5" width="6" height="2" fill="currentColor"/>
-                    <rect x="17" y="7" width="2" height="4" fill="currentColor"/>
-                    <rect x="11" y="9" width="6" height="2" fill="currentColor"/>
-                    <rect x="7" y="11" width="6" height="2" fill="currentColor"/>
-                    <rect x="5" y="13" width="2" height="4" fill="currentColor"/>
-                    <rect x="5" y="17" width="6" height="2" fill="currentColor"/>
-                </svg>
-            ),
-        };
-        
-        // Ultra-lightweight CSS-only Starfield - Optimized for performance
-        const Starfield = () => {
-            // Generate stars once - spread across entire viewport
-            const stars = React.useMemo(() => {
-                return Array.from({ length: 250 }, (_, i) => {
-                    const size = Math.random();
-                    const isLarge = size > 0.85; // 15% chance of large star
-                    
-                    return {
-                        id: i,
-                        left: Math.random() * 100,
-                        top: Math.random() * 100,
-                        size: isLarge ? 1.5 + Math.random() * 1 : 0.5 + Math.random() * 1,
-                        opacity: 0.4 + Math.random() * 0.6,
-                        twinkleDuration: 2 + Math.random() * 4,
-                        twinkleDelay: Math.random() * 4,
-                        isLarge: isLarge
-                    };
-                });
-            }, []);
+        // Cinematic Intro Sequence Component
+        const IntroSequence = () => {
+            const [typedText, setTypedText] = useState('');
+            const [showName, setShowName] = useState(false);
+            const [currentFontIndex, setCurrentFontIndex] = useState(0);
+            const [fontLocked, setFontLocked] = useState(false);
+            const [showCursor, setShowCursor] = useState(true);
+            const [fadeOut, setFadeOut] = useState(false);
+            const [showChoices, setShowChoices] = useState(false);
             
-            return (
-                <div className="starfield-container">
-                    {stars.map((star) => (
-                        <div
-                            key={star.id}
-                            className={`star ${star.isLarge ? 'large' : ''}`}
-                            style={{
-                                left: `${star.left}%`,
-                                top: `${star.top}%`,
-                                width: `${star.size}px`,
-                                height: `${star.size}px`,
-                                opacity: star.opacity,
-                                animationDuration: `${star.twinkleDuration}s`,
-                                animationDelay: `${star.twinkleDelay}s`,
-                            }}
-                        />
-                    ))}
-                </div>
-            );
-        };
-        
-        // Pixel Icon Component
-        const PixelIcon = ({ icon, color = "cyan", className = "" }) => {
-            const IconComponent = PixelIcons[icon];
-            const colorClass = color === "cyan" ? "text-pixel-cyan" : 
-                              color === "orange" ? "text-cosmic-orange" : 
-                              color === "pink" ? "text-cosmic-pink" : 
-                              color === "mint" ? "text-pixel-mint" : "text-pixel-cyan";
+            // Array of fonts to cycle through
+            const fonts = [
+                "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+                "'Playfair Display', serif",
+                "'Press Start 2P', monospace",
+                "'Montserrat', sans-serif",
+                "'Georgia', serif",
+                "'Courier New', monospace",
+                "'Times New Roman', serif",
+                "'Arial', sans-serif",
+                "'Verdana', sans-serif",
+                "'Comic Sans MS', cursive",
+                "'Impact', sans-serif",
+                "'Trebuchet MS', sans-serif",
+                "'Palatino', serif",
+                "'Garamond', serif",
+                "'Helvetica', sans-serif"
+            ];
             
-            return (
-                <div className={`inline-flex items-center justify-center p-2 bg-space-800 border-2 border-current ${colorClass} ${className}`}>
-                    {IconComponent ? <IconComponent /> : <span className="text-xs font-pixel">{icon}</span>}
-                </div>
-            );
-        };
-        
-        // Navigation Component
-        const NavBar = () => {
-            const [scrolled, setScrolled] = useState(false);
+            // Final font to settle on
+            const finalFont = "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif";
             
             useEffect(() => {
-                const handleScroll = () => {
-                    setScrolled(window.scrollY > 50);
+                let charIndex = 0;
+                let timeoutId;
+                let isCleanedUp = false;
+                
+                const greeting = "Hi I'm";
+                
+                const typeGreeting = () => {
+                    if (isCleanedUp) return;
+                    
+                    if (charIndex < greeting.length) {
+                        const char = greeting.charAt(charIndex);
+                        setTypedText(prev => prev + char);
+                        charIndex++;
+                        timeoutId = setTimeout(typeGreeting, 100); // Faster - 100ms per character
+                    } else {
+                        // Greeting complete, show name
+                        setTimeout(() => {
+                            if (isCleanedUp) return;
+                            setShowName(true);
+                        }, 300);
+                    }
                 };
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
+                
+                typeGreeting();
+                
+                return () => {
+                    isCleanedUp = true;
+                    if (timeoutId) clearTimeout(timeoutId);
+                };
             }, []);
             
-            const navItems = ['About', 'Projects', 'Blog', 'Activity', 'Contact'];
-            
-            return (
-                <div className="fixed top-0 w-full z-50 px-4 pt-4">
-                    <motion.nav
-                        initial={{ y: -100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-lg mx-auto transition-all duration-300"
-                        style={{
-                            background: 'rgba(26, 26, 36, 0.7)',
-                            backdropFilter: 'blur(20px) saturate(180%)',
-                            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                            borderRadius: '20px',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
-                        }}
-                    >
-                        <div className="px-4 py-3 flex justify-center items-center">
-                            <div className="hidden md:flex gap-6 items-center">
-                                {navItems.map((item) => (
-                                    <motion.a
-                                        key={item}
-                                        href={`#${item.toLowerCase()}`}
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className="hover:text-white transition-colors font-medium text-base"
-                                        style={{ color: '#d1d1d6' }}
-                                    >
-                                        {item}
-                                    </motion.a>
-                                ))}
-                            </div>
-                            
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="md:hidden focus:outline-none"
-                                style={{ color: '#f5f5f7' }}
-                            >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            </motion.button>
-                        </div>
-                    </motion.nav>
-                </div>
-            );
-        };
-        
-        // Button Component
-        const GradientButton = ({ children, onClick, variant = "primary" }) => (
-            <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={onClick}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cosmic-pink focus:ring-offset-2 focus:ring-offset-space-900 ${
-                    variant === "primary"
-                        ? "bg-gradient-to-r from-cosmic-orange to-cosmic-pink text-white shadow-glow hover:shadow-glow-pink"
-                        : "border-2 border-cosmic-orange text-cosmic-orange hover:bg-cosmic-orange/10"
-                }`}
-            >
-                {children}
-            </motion.button>
-        );
-        
-        // Hero Section
-        const Hero = () => {
-            const { scrollY } = useScroll();
-            const y = useTransform(scrollY, [0, 800], [0, 200]);
-            const opacity = useTransform(scrollY, [0, 1000], [1, 1]); // Stays fully visible
-            const scale = useTransform(scrollY, [0, 800], [1, 0.9]);
-            const width = useTransform(scrollY, [0, 800], ["100%", "90%"]);
-            
-            return (
-                <section 
-                    className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden"
-                >
-                    <motion.div 
-                        className="max-w-4xl mx-auto text-center hero-content-layer"
-                        style={{ y, opacity, scale, width }}
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                        
-                        {/* Name with Montserrat font and blend effect */}
-                        <h1 className="mb-6" style={{ 
-                            fontFamily: "'Montserrat', sans-serif",
-                            fontSize: 'clamp(56px, 10vw, 120px)',
-                            fontWeight: 900,
-                            fontStyle: 'normal',
-                            color: '#f5f5f7',
-                            letterSpacing: '0em',
-                            lineHeight: '1em',
-                            whiteSpace: 'nowrap',
-                            mixBlendMode: 'difference',
-                            position: 'relative',
-                            zIndex: 2,
-                            marginLeft: '-100px'
-                        }}>
-                            <div style={{
-                                fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
-                                fontSize: 'clamp(40px, 5vw, 64px)',
-                                fontWeight: 700,
-                                marginBottom: '10px',
-                                letterSpacing: '-0.02em',
-                                textAlign: 'center',
-                                marginLeft: '100px'
-                            }}>
-                                Hi I'm
-                            </div>
-                            Harshit Vaishnav
-                        </h1>
-                        
-                        <p className="mb-4" style={{
-                            fontFamily: "'Playfair Display', serif",
-                            fontStyle: 'italic',
-                            fontWeight: 600,
-                            fontSize: 'clamp(18px, 2.5vw, 24px)',
-                            color: '#f5f5f7'
-                        }}>
-                            ✨ Aspiring AI/ML Engineer & Student ✨
-                        </p>
-                        
-                        <p className="apple-body-large mb-12 max-w-2xl mx-auto">
-                            Building intelligent AI systems with expertise in Machine Learning, Deep Learning, and Generative AI.
-                            Bridging research with real-world applications.
-                        </p>
-                    </motion.div>
-                </motion.div>
-            </section>
-        );
-        };
-        
-        // About Section
-        // About Me Section
-        const About = () => {
-            return (
-                <section id="about" className="min-h-screen py-20 px-6">
-                    <div className="max-w-6xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h2 className="apple-headline text-center mb-12" style={{ color: '#f5f5f7' }}>
-                                About Me
-                            </h2>
-                            
-                            <motion.div
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                className="card-glow rounded-3xl relative"
-                                style={{
-                                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%)',
-                                    backdropFilter: 'blur(20px)',
-                                    border: '2px solid rgba(255, 255, 255, 0.3)',
-                                    overflow: 'visible'
-                                }}
-                            >
-                                {/* Pixel Dante Character - Sitting on the card */}
-                                <div className="pixel-dante">
-                                    <img src="Video-Background-Changed-to-Bl-unscreen.gif" alt="Dante Character" />
-                                </div>
-                                
-                                <div className="grid md:grid-cols-2 gap-0" style={{ overflow: 'hidden' }}>
-                                    {/* Image Side */}
-                                    <div className="relative h-full min-h-[400px] md:min-h-[500px] overflow-hidden">
-                                        <div 
-                                            className="absolute inset-0"
-                                            style={{
-                                                backgroundImage: 'url(assests/profile.jpg)',
-                                                backgroundSize: 'cover',
-                                                backgroundPosition: 'center',
-                                                filter: 'grayscale(20%) contrast(1.1)'
-                                            }}
-                                        />
-                                        {/* Subtle overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-transparent" />
-                                    </div>
-                                    
-                                    {/* Text Side */}
-                                    <div className="p-8 md:p-12 flex flex-col justify-center" style={{ background: 'rgba(0, 0, 0, 0.4)' }}>
-                                        <motion.div
-                                            initial={{ opacity: 0, x: 20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.6, delay: 0.4 }}
-                                        >
-                                            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ 
-                                                color: '#f5f5f7',
-                                                fontWeight: 700,
-                                                letterSpacing: '-0.02em'
-                                            }}>
-                                                Bring your creativity to life
-                                            </h3>
-                                            
-                                            <p className="apple-body-large mb-6" style={{ fontSize: '18px', lineHeight: '1.6', color: '#f5f5f7' }}>
-                                                I'm currently pursuing a B.Tech in Artificial Intelligence and Data Science at JECRC University. 
-                                                My academic and personal projects are focused on developing expertise in Machine Learning, Deep Learning, 
-                                                and Generative AI, with the long-term goal of becoming a full-stack AI/ML Engineer.
-                                            </p>
-                                            <p className="apple-body-large mb-8" style={{ fontSize: '18px', lineHeight: '1.6', color: '#f5f5f7' }}>
-                                                I'm actively building strong foundations in Python, data handling, and model development, while exploring 
-                                                advanced areas like LLMs, MLOps, and AI deployment pipelines. I'm passionate about creating scalable, 
-                                                production-ready AI systems and contributing to projects that bridge research with real-world applications.
-                                            </p>
-                                            
-                                            <motion.button
-                                                whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
-                                                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                                                className="px-8 py-4 rounded-full font-semibold transition-all duration-200 flex items-center gap-2"
-                                                style={{
-                                                    background: 'rgba(255, 255, 255, 0.1)',
-                                                    color: '#f5f5f7',
-                                                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                                                    fontSize: '16px',
-                                                    fontWeight: 600
-                                                }}
-                                            >
-                                                <span>✨</span>
-                                                <span>Get In Touch</span>
-                                            </motion.button>
-                                        </motion.div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    </div>
-                </section>
-            );
-        };
+            // Font cycling effect
+            // NOTE: depend only on showName to avoid the effect re-running when we set fontLocked,
+            // which caused the cleanup to clear the showChoices timeout before it fired.
+            useEffect(() => {
+                if (!showName) return;
 
-        // Skills Section
-        const Skills = () => {
-            const skills = [
-                { name: "Python", icon: "🐍" },
-                { name: "C++", icon: "⚡" },
-                { name: "Machine Learning", icon: "🤖" },
-                { name: "Deep Learning", icon: "🧠" },
-                { name: "Generative AI", icon: "✨" },
-                { name: "Computer Vision", icon: "👁️" },
-                { name: "NLP", icon: "💬" },
-                { name: "CNNs", icon: "🔗" },
-                { name: "Graph Neural Networks", icon: "📊" },
-                { name: "HTML/CSS/JavaScript", icon: "🌐" },
-                { name: "SQL", icon: "💾" },
-                { name: "Pandas", icon: "🐼" },
-                { name: "REST APIs", icon: "🔌" },
-                { name: "GitHub", icon: "📁" },
-                { name: "Jupyter", icon: "📓" },
-                { name: "Figma", icon: "🎨" },
-                { name: "UI/UX Design", icon: "✏️" }
-            ];
-            
-            return (
-                <section id="skills" className="min-h-screen py-20 px-6 bg-gradient-to-b from-transparent to-space-800/20">
-                    <div className="max-w-6xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h2 className="apple-headline text-center mb-12" style={{ color: '#f5f5f7' }}>
-                                Skills & Technologies
-                            </h2>
-                            
-                            <motion.div
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                className="max-w-5xl mx-auto"
-                            >
-                                {/* macOS Browser Window */}
-                                <div className="rounded-xl overflow-hidden shadow-2xl" style={{
-                                    background: '#f5e6d3',
-                                    border: '1px solid rgba(0, 0, 0, 0.1)'
-                                }}>
-                                    {/* Browser Header */}
-                                    <div className="flex items-center justify-between px-4 py-3" style={{
-                                        background: 'rgba(255, 255, 255, 0.8)',
-                                        borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
-                                    }}>
-                                        {/* Traffic Lights */}
-                                        <div className="flex gap-2">
-                                            <div style={{
-                                                width: '12px',
-                                                height: '12px',
-                                                borderRadius: '50%',
-                                                background: '#ff5f57'
-                                            }}></div>
-                                            <div style={{
-                                                width: '12px',
-                                                height: '12px',
-                                                borderRadius: '50%',
-                                                background: '#ffbd2e'
-                                            }}></div>
-                                            <div style={{
-                                                width: '12px',
-                                                height: '12px',
-                                                borderRadius: '50%',
-                                                background: '#28c840'
-                                            }}></div>
-                                        </div>
-                                        
-                                        {/* URL Bar */}
-                                        <div className="flex-1 mx-4">
-                                            <div className="px-4 py-1 rounded-md text-sm" style={{
-                                                background: 'rgba(0, 0, 0, 0.05)',
-                                                color: '#000',
-                                                textAlign: 'center',
-                                                fontFamily: 'Inter, sans-serif',
-                                                fontSize: '13px'
-                                            }}>
-                                                skills.portfolio.jpg
-                                            </div>
-                                        </div>
-                                        
-                                        {/* Browser Icons */}
-                                        <div className="flex gap-3" style={{ opacity: 0.4 }}>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <circle cx="11" cy="11" r="8"></circle>
-                                                <path d="m21 21-4.35-4.35"></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    
-                                    {/* Browser Content */}
-                                    <div className="p-12" style={{
-                                        background: '#f5e6d3',
-                                        minHeight: '400px',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}>
-                                        <div className="grid grid-cols-3 gap-x-12 gap-y-10 max-w-4xl">
-                                            {skills.map((skill, index) => (
-                                                <motion.div
-                                                    key={skill.name}
-                                                    initial={{ opacity: 0, scale: 0.8 }}
-                                                    whileInView={{ opacity: 1, scale: 1 }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ 
-                                                        duration: 0.3, 
-                                                        delay: index * 0.05
-                                                    }}
-                                                    className="flex flex-col items-center justify-center gap-3"
-                                                >
-                                                    {/* Pixelated Badge */}
-                                                    <div style={{
-                                                        width: '64px',
-                                                        height: '64px',
-                                                        background: 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)',
-                                                        borderRadius: '8px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        fontSize: '32px',
-                                                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                                                        imageRendering: 'pixelated',
-                                                        position: 'relative',
-                                                        overflow: 'hidden'
-                                                    }}>
-                                                        {/* Pixelated overlay effect */}
-                                                        <div style={{
-                                                            position: 'absolute',
-                                                            inset: 0,
-                                                            background: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.1) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.1) 3px)',
-                                                            pointerEvents: 'none'
-                                                        }}></div>
-                                                        <span style={{ position: 'relative', zIndex: 1 }}>{skill.icon}</span>
-                                                    </div>
-                                                    
-                                                    {/* Skill Name */}
-                                                    <div style={{
-                                                        fontSize: '13px',
-                                                        fontWeight: 500,
-                                                        color: '#000',
-                                                        textAlign: 'center',
-                                                        fontFamily: 'Inter, sans-serif',
-                                                        maxWidth: '120px'
-                                                    }}>
-                                                        {skill.name}
-                                                    </div>
-                                                </motion.div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    
-                                    {/* Instagram watermark */}
-                                    <div className="text-center pb-6">
-                                        <div style={{
-                                            display: 'inline-block',
-                                            border: '2px solid #000',
-                                            borderRadius: '20px',
-                                            padding: '6px 16px',
-                                            fontSize: '12px',
-                                            fontWeight: 600,
-                                            color: '#000',
-                                            background: 'transparent',
-                                            letterSpacing: '0.5px'
-                                        }}>
-                                            INSTAGRAM
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    </div>
-                </section>
-            );
-        };
-        
-        // Experience Section with Slide Scroll Effect
-        const Experience = () => {
-            const [currentSlide, setCurrentSlide] = React.useState(0);
-            const [isSliding, setIsSliding] = React.useState(false);
-            const slideContainerRef = React.useRef(null);
-            
-            const experiences = [
-                {
-                    company: "Tech Company",
-                    role: "AI/ML Intern",
-                    period: "2024 - Present",
-                    description: "Working on machine learning models and deep learning projects.",
-                    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&q=80",
-                    achievements: [
-                        "Developed ML models with 95% accuracy",
-                        "Implemented neural networks for image classification",
-                        "Contributed to research papers"
-                    ]
-                },
-                {
-                    company: "Startup XYZ",
-                    role: "Software Developer Intern",
-                    period: "2023 - 2024",
-                    description: "Built web applications and worked with modern frameworks.",
-                    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80",
-                    achievements: [
-                        "Created responsive web applications",
-                        "Integrated REST APIs",
-                        "Collaborated with design team"
-                    ]
-                },
-                {
-                    company: "University Research Lab",
-                    role: "Research Assistant",
-                    period: "2022 - 2023",
-                    description: "Contributed to cutting-edge AI research and development.",
-                    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1920&q=80",
-                    achievements: [
-                        "Published research in AI conferences",
-                        "Developed novel algorithms",
-                        "Mentored junior researchers"
-                    ]
-                }
-            ];
-            
-            const slideNext = () => {
-                if (isSliding || currentSlide >= experiences.length - 1) return;
-                setIsSliding(true);
-                setCurrentSlide(currentSlide + 1);
-                setTimeout(() => {
-                    setIsSliding(false);
+                let intervalId;
+                let lockTimeoutId;
+                let isCleanedUp = false;
+
+                // Cycle through fonts every 100ms
+                intervalId = setInterval(() => {
+                    if (isCleanedUp) return;
+                    setCurrentFontIndex(prev => (prev + 1) % fonts.length);
                 }, 100);
-            };
-            
-            const slidePrev = () => {
-                if (isSliding || currentSlide <= 0) return;
-                setIsSliding(true);
-                setCurrentSlide(currentSlide - 1);
-                setTimeout(() => {
-                    setIsSliding(false);
-                }, 100);
-            };
-            
-            React.useEffect(() => {
-                const handleKeyDown = (e) => {
-                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-                        slideNext();
-                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-                        slidePrev();
-                    }
-                };
-                
-                const handleWheel = (e) => {
-                    if (!slideContainerRef.current) return;
-                    const rect = slideContainerRef.current.getBoundingClientRect();
-                    if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
-                        if (e.deltaY > 0) {
-                            slideNext();
-                        } else {
-                            slidePrev();
-                        }
-                    }
-                };
-                
-                window.addEventListener('keydown', handleKeyDown);
-                window.addEventListener('wheel', handleWheel, { passive: true });
-                
+
+                // Lock to final font after 1 second and then show choices shortly after.
+                lockTimeoutId = setTimeout(() => {
+                    if (isCleanedUp) return;
+                    clearInterval(intervalId);
+                    setFontLocked(true);
+                    console.log('Font locked!');
+
+                    // Trigger choices display after a short delay. This is created inside the
+                    // lock callback so it won't be cleared by the effect cleanup that runs
+                    // when fontLocked updates.
+                    setTimeout(() => {
+                        console.log('Setting showChoices to TRUE');
+                        setShowChoices(true);
+                    }, 100);
+                }, 1000);
+
                 return () => {
-                    window.removeEventListener('keydown', handleKeyDown);
-                    window.removeEventListener('wheel', handleWheel);
+                    isCleanedUp = true;
+                    if (intervalId) clearInterval(intervalId);
+                    if (lockTimeoutId) clearTimeout(lockTimeoutId);
                 };
-            }, [currentSlide, isSliding]);
+            }, [showName]);
+            
+            const handleCardClick = (type) => {
+                if (type === 'professional') {
+                    // Redirect to main portfolio
+                    window.location.href = 'portfolio.html';
+                } else {
+                    // Redirect to personal page (for now, go to portfolio about section)
+                    window.location.href = 'portfolio.html#about';
+                }
+            };
+            
+            const handleSkip = () => {
+                window.location.href = 'portfolio.html';
+            };
             
             return (
-                <section id="experience" ref={slideContainerRef}>
-                    <div className="text-center mb-16 pt-20">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="text-6xl font-bold mb-4"
-                            style={{
-                                fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif',
-                                fontSize: 'clamp(48px, 6vw, 96px)',
-                                fontWeight: 700,
-                                letterSpacing: '-0.02em',
-                                background: 'linear-gradient(135deg, #f5f5f7 0%, #a1a1a6 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text'
+                <div className="intro-overlay">
+                    <button className="intro-skip-button" onClick={handleSkip}>
+                        Skip Intro →
+                    </button>
+                    
+                    <div className="intro-content-wrapper">
+                        <motion.div 
+                            className="intro-text-row"
+                            animate={{ 
+                                y: showChoices ? -50 : 0 
                             }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
                         >
-                            Experience
-                        </motion.h2>
-                    </div>
-                    <div className={`exp-slides ${isSliding ? 'is-sliding' : ''}`}>
-                        {experiences.map((exp, index) => (
-                            <div key={index} className={`exp-slide ${currentSlide === index ? 'is-active' : ''}`}>
-                                <div className="exp-slide__content">
-                                    <figure className="exp-slide__figure">
-                                        <div 
-                                            className="exp-slide__img" 
-                                            style={{ backgroundImage: `url(${exp.image})` }}
-                                        ></div>
-                                    </figure>
-                                    <header className="exp-slide__header">
-                                        <div className="exp-slide__title">
-                                            <div className="title-line" style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 'clamp(32px, 5vw, 72px)', color: '#f5f5f7', marginBottom: '0.2em' }}>
-                                                <span>{exp.role}</span>
-                                            </div>
-                                            <div className="title-line" style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: 'clamp(20px, 3vw, 36px)', color: '#FF7A18', marginBottom: '0.3em' }}>
-                                                <span>{exp.company}</span>
-                                            </div>
-                                            <div className="title-line" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: 'clamp(16px, 2vw, 24px)', color: '#a1a1a6', marginBottom: '1em' }}>
-                                                <span>{exp.period}</span>
-                                            </div>
-                                            <div className="title-line" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: 'clamp(16px, 2vw, 21px)', color: '#f5f5f7', marginBottom: '1em', maxWidth: '600px', lineHeight: '1.5' }}>
-                                                <span>{exp.description}</span>
-                                            </div>
-                                            {exp.achievements.map((achievement, i) => (
-                                                <div key={i} className="title-line" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: 'clamp(14px, 1.5vw, 18px)', color: '#a1a1a6', marginBottom: '0.5em', maxWidth: '600px' }}>
-                                                    <span>▹ {achievement}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </header>
-                                </div>
+                            <div className="intro-typed-text">
+                                {typedText}
+                                {!showName && <span className="intro-cursor"></span>}
                             </div>
-                        ))}
-                        
-                        <nav className="exp-slides-nav">
-                            <div className="exp-slides-nav__nav">
-                                <button onClick={slidePrev} disabled={currentSlide === 0}>Prev</button>
-                                <button onClick={slideNext} disabled={currentSlide === experiences.length - 1}>Next</button>
-                            </div>
-                        </nav>
-                    </div>
-                </section>
-            );
-        };
-        
-        // Project Card Component
-        const ProjectCard = ({ title, description, tags, liveUrl, codeUrl, delay = 0 }) => (
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay }}
-                whileHover={{ y: -10 }}
-                className="card-glow rounded-xl p-6 transition-all duration-300 group"
-            >
-                <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-2xl font-apple font-bold group-hover:text-cosmic-orange transition-colors" style={{ fontSize: '24px', fontWeight: 700, letterSpacing: '-0.01em', color: '#f5f5f7' }}>
-                        {title}
-                    </h3>
-                </div>
-                
-                <p className="apple-body mb-6">
-                    {description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                    {tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="px-3 py-1 text-sm bg-cosmic-orange/20 border border-cosmic-orange/40 rounded text-cosmic-orange font-medium"
-                        >
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-                
-                <div className="flex gap-4">
-                    <motion.a
-                        href={liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-2 text-cosmic-pink hover:text-cosmic-coral transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-cosmic-pink rounded px-2 py-1"
-                    >
-                        <span>Live Demo</span>
-                    </motion.a>
-                    <motion.a
-                        href={codeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-2 text-pixel-cyan hover:text-pixel-mint transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-pixel-cyan rounded px-2 py-1"
-                    >
-                        <span>Code</span>
-                    </motion.a>
-                </div>
-            </motion.div>
-        );
-        
-        // Projects Section
-        const Projects = () => {
-            // Project data
-            const projects = [
-                {
-                    title: "AI Image Generator",
-                    description: "A deep learning model that generates photorealistic images from text descriptions using GANs and transformer architectures.",
-                    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop"
-                },
-                {
-                    title: "Computer Vision System",
-                    description: "Real-time object detection and tracking system using CNNs for autonomous vehicle applications.",
-                    image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&h=600&fit=crop"
-                },
-                {
-                    title: "NLP Chatbot",
-                    description: "Intelligent conversational AI powered by transformer models with context-aware responses and sentiment analysis.",
-                    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=600&fit=crop"
-                },
-                {
-                    title: "Predictive Analytics",
-                    description: "Machine learning platform for predictive analytics using ensemble methods and deep neural networks.",
-                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
-                },
-                {
-                    title: "Graph Neural Network",
-                    description: "GNN-based recommendation system for social networks with advanced node embedding techniques.",
-                    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop"
-                },
-                {
-                    title: "Medical AI Diagnosis",
-                    description: "Deep learning model for medical image analysis and disease detection with 95% accuracy on benchmark datasets.",
-                    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop"
-                }
-            ];
-            
-            useEffect(() => {
-                // Initialize Owl Carousel - Optimized
-                const carousel = $(".custom-carousel").owlCarousel({
-                    autoWidth: true,
-                    loop: true,
-                    autoplay: true,
-                    autoplayTimeout: 4000, // Increased from 3000
-                    autoplayHoverPause: true,
-                    margin: 15,
-                    smartSpeed: 600, // Faster transitions
-                    fluidSpeed: 400,
-                    autoplaySpeed: 600,
-                    navSpeed: 600,
-                    dragEndSpeed: 600,
-                });
-                
-                // Handle click events
-                $(".custom-carousel .item").click(function () {
-                    $(".custom-carousel .item").not($(this)).removeClass("active");
-                    $(this).toggleClass("active");
-                });
-                
-                // Cleanup
-                return () => {
-                    carousel.trigger('destroy.owl.carousel');
-                };
-            }, []);
-            
-            return (
-                <section id="projects" className="min-h-screen py-20 px-6 bg-gradient-to-b from-transparent to-space-800/20">
-                    <div className="max-w-7xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h2 className="apple-headline text-center mb-4" style={{ color: '#f5f5f7' }}>
-                                Featured Projects
-                            </h2>
-                            <p className="text-center apple-subheadline mb-16">
-                                A collection of my AI/ML projects and experiments
-                            </p>
-                            
-                            <div className="game-section">
-                                <div className="owl-carousel custom-carousel owl-theme">
-                                    {projects.map((project, index) => (
-                                        <div 
-                                            key={index}
-                                            className={`item ${index === 0 ? 'active' : ''}`}
-                                            style={{ backgroundImage: `url(${project.image})` }}
-                                        >
-                                            <div className="item-desc">
-                                                <h3>{project.title}</h3>
-                                                <p>{project.description}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-            );
-        };
-        
-        // Activity/Achievements Section
-        const Activity = () => {
-            // Add your activity stats here manually
-            // Example format for stats:
-            // { label: "Repositories", value: "47", icon: "box" }
-            // { label: "Contributions", value: "1,234", icon: "sparkle" }
-            // { label: "Streak Days", value: "127", icon: "fire" }
-            
-            // Add your contribution data here manually
-            // Example format:
-            // const streakDays = Array.from({ length: 52 }, (_, i) => ({
-            //     week: i,
-            //     count: Math.floor(Math.random() * 5)
-            // }));
-            
-            const stats = [];
-            const hasContributionData = false; // Set to true when you add contribution data
-            
-            return (
-                <section id="activity" className="min-h-screen py-20 px-6">
-                    <div className="max-w-6xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h2 className="apple-headline text-center mb-16" style={{ color: '#f5f5f7' }}>
-                                Activity & Achievements
-                            </h2>
-                            
-                            {stats.length > 0 || hasContributionData ? (
-                                <>
-                                    {stats.length > 0 && (
-                                        <div className="grid md:grid-cols-3 gap-8 mb-16">
-                                            {stats.map((stat, index) => (
-                                                <motion.div
-                                                    key={stat.label}
-                                                    initial={{ opacity: 0, scale: 0.8 }}
-                                                    whileInView={{ opacity: 1, scale: 1 }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                                    whileHover={{ scale: 1.05 }}
-                                                    className="card-glow rounded-xl p-8 text-center"
-                                                >
-                                                    <div className="text-4xl font-apple font-bold mb-2" style={{ fontSize: '48px', fontWeight: 700, letterSpacing: '-0.02em', color: '#f5f5f7' }}>
-                                                        {stat.value}
-                                                    </div>
-                                                    <div className="apple-body" style={{ color: '#a1a1a6' }}>
-                                                        {stat.label}
-                                                    </div>
-                                                </motion.div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </>
-                            ) : (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true }}
-                                    className="text-center py-20"
-                                >
-                                    <motion.div
-                                        animate={{ 
-                                            scale: [1, 1.1, 1],
-                                            rotate: [0, 5, -5, 0]
-                                        }}
-                                        transition={{ 
-                                            duration: 3,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
-                                        className="inline-block mb-8"
-                                    >
-                                    </motion.div>
-                                    <h3 className="apple-headline mb-4" style={{ fontSize: '32px', color: '#f5f5f7' }}>
-                                        Coming Soon
-                                    </h3>
-                                    <p className="apple-body mb-8" style={{ color: '#86868b' }}>
-                                        Activity stats and achievements will be added here.
-                                    </p>
-                                </motion.div>
-                            )}
-                        </motion.div>
-                    </div>
-                </section>
-            );
-        };
-        
-        // Blog Section
-        const Blog = () => {
-            const blogPosts = [
-                // Add your blog posts here manually
-                // Example format:
-                // {
-                //     title: "Your Blog Title",
-                //     excerpt: "Brief description of your blog post...",
-                //     date: "Nov 1, 2025",
-                //     readTime: "5 min read",
-                //     tags: ["React", "TypeScript"],
-                //     slug: "/blog/your-post-slug"
-                // }
-            ];
-            
-            return (
-                <section id="blog" className="min-h-screen py-20 px-6 bg-gradient-to-b from-transparent via-space-800/10 to-transparent">
-                    <div className="max-w-7xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <div className="text-center mb-16">
-                                <h2 className="apple-headline mb-4" style={{ color: '#f5f5f7' }}>
-                                    Blog & Insights
-                                </h2>
-                                <p className="apple-subheadline max-w-2xl mx-auto">
-                                    Sharing thoughts on development, design, and technology. 
-                                    Join me on this journey of continuous learning.
-                                </p>
-                            </div>
-                            
-                            {blogPosts.length > 0 ? (
-                                <>
-                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        {blogPosts.map((post, index) => (
-                                            <motion.article
-                                                key={post.title}
-                                                initial={{ opacity: 0, y: 50 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                                whileHover={{ y: -10 }}
-                                                className="card-glow rounded-xl p-6 transition-all duration-300 group cursor-pointer"
-                                                onClick={() => window.location.href = post.slug}
-                                            >
-                                                <div className="flex items-center gap-2 apple-caption mb-4">
-                                                    <span>{post.date}</span>
-                                                    <span>•</span>
-                                                    <span>{post.readTime}</span>
-                                                </div>
-                                                
-                                                <h3 className="text-xl font-semibold mb-3 group-hover:text-cosmic-orange transition-colors apple-body-large" style={{ color: '#f5f5f7', fontSize: '21px', fontWeight: 600 }}>
-                                                    {post.title}
-                                                </h3>
-                                                
-                                                <p className="mb-6 leading-relaxed line-clamp-3 apple-body" style={{ color: '#a1a1a6' }}>
-                                                    {post.excerpt}
-                                                </p>
-                                                
-                                                <div className="flex flex-wrap gap-2 mb-4">
-                                                    {post.tags.map((tag) => (
-                                                        <span
-                                                            key={tag}
-                                                            className="px-3 py-1 text-xs bg-pixel-cyan/10 border border-pixel-cyan/30 rounded text-pixel-cyan font-medium"
-                                                        >
-                                                            #{tag}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                                
-                                                <motion.div
-                                                    className="flex items-center gap-2 text-cosmic-pink font-semibold text-sm"
-                                                    whileHover={{ x: 5 }}
-                                                >
-                                                    <span>Read More</span>
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                    </svg>
-                                                </motion.div>
-                                            </motion.article>
-                                        ))}
-                                    </div>
-                                    
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        whileInView={{ opacity: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.6, delay: 0.4 }}
-                                        className="text-center mt-12"
-                                    >
-                                        <p className="mb-6 apple-body" style={{ color: '#86868b' }}>
-                                            More articles coming soon! Subscribe to stay updated.
-                                        </p>
-                                        <GradientButton onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
-                                            Get Notified
-                                        </GradientButton>
-                                    </motion.div>
-                                </>
-                            ) : (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true }}
-                                    className="text-center py-20"
-                                >
-                                    <h3 className="text-2xl font-apple font-semibold mb-4" style={{ fontSize: '28px', fontWeight: 600, color: '#f5f5f7', letterSpacing: '-0.01em' }}>
-                                        Coming Soon
-                                    </h3>
-                                    <p className="apple-body-large max-w-md mx-auto mb-8">
-                                        I'm currently working on some exciting content. Check back soon for articles on development, design, and technology!
-                                    </p>
-                                    <GradientButton onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
-                                        Get Notified When I Publish
-                                    </GradientButton>
-                                </motion.div>
-                            )}
-                        </motion.div>
-                    </div>
-                </section>
-            );
-        };
-        
-        // 3D Card Effect Component (Aceternity UI)
-        const CardContainer = ({ children, className }) => {
-            const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
-            const [isHovering, setIsHovering] = React.useState(false);
-            const containerRef = React.useRef(null);
-            
-            const handleMouseMove = (e) => {
-                if (!containerRef.current) return;
-                const rect = containerRef.current.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width;
-                const y = (e.clientY - rect.top) / rect.height;
-                setMousePosition({ x, y });
-            };
-            
-            const rotateX = isHovering ? (mousePosition.y - 0.5) * 20 : 0;
-            const rotateY = isHovering ? (mousePosition.x - 0.5) * -20 : 0;
-            
-            return (
-                <div
-                    ref={containerRef}
-                    onMouseMove={handleMouseMove}
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
-                    className={className}
-                    style={{
-                        perspective: '1000px',
-                        transformStyle: 'preserve-3d'
-                    }}
-                >
-                    <div
-                        style={{
-                            transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-                            transition: 'transform 0.1s ease-out',
-                            transformStyle: 'preserve-3d'
-                        }}
-                    >
-                        {children}
-                    </div>
-                </div>
-            );
-        };
-        
-        const CardBody = ({ children, className, style }) => {
-            return (
-                <div className={className} style={{ ...style, transformStyle: 'preserve-3d' }}>
-                    {children}
-                </div>
-            );
-        };
-        
-        const CardItem = ({ children, translateZ = 0, className, as = 'div', ...props }) => {
-            const Component = as;
-            return (
-                <Component
-                    className={className}
-                    style={{
-                        transform: `translateZ(${translateZ}px)`,
-                        transformStyle: 'preserve-3d'
-                    }}
-                    {...props}
-                >
-                    {children}
-                </Component>
-            );
-        };
-        
-        // Contact Section
-        const Contact = () => {
-            const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-            const [submitted, setSubmitted] = useState(false);
-            const canvasRef = useRef(null);
-            
-            useEffect(() => {
-                const canvas = canvasRef.current;
-                if (!canvas) return;
-                
-                const ctx = canvas.getContext('2d');
-                canvas.width = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
-                
-                const resolution = 128;
-                let current = new Float32Array(resolution * resolution);
-                let previous = new Float32Array(resolution * resolution);
-                let isCursorActive = false;
-                let lastCursorTime = Date.now();
-                
-                const addRipple = (x, y, strength = 1.0) => {
-                    const texX = Math.floor((x / canvas.width) * resolution);
-                    const texY = Math.floor((y / canvas.height) * resolution);
-                    const radius = 5;
-                    
-                    for (let i = -radius; i <= radius; i++) {
-                        for (let j = -radius; j <= radius; j++) {
-                            const dist = Math.sqrt(i * i + j * j);
-                            if (dist <= radius) {
-                                const posX = texX + i;
-                                const posY = texY + j;
-                                if (posX >= 0 && posX < resolution && posY >= 0 && posY < resolution) {
-                                    const index = posY * resolution + posX;
-                                    const falloff = 1.0 - dist / radius;
-                                    previous[index] += Math.cos((dist / radius) * Math.PI * 0.5) * strength * falloff * 0.5;
-                                }
-                            }
-                        }
-                    }
-                };
-                
-                let lastMouse = { x: 0, y: 0 };
-                let mouseThrottle = 0;
-                
-                const handleMouseMove = (e) => {
-                    const rect = canvas.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const now = Date.now();
-                    
-                    isCursorActive = true;
-                    lastCursorTime = now;
-                    
-                    if (now - mouseThrottle > 16) {
-                        const dx = x - lastMouse.x;
-                        const dy = y - lastMouse.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (dist > 2) {
-                            // 20% stronger when cursor is active
-                            addRipple(x, y, Math.min(dist / 20, 1.5) * 1.2);
-                            lastMouse = { x, y };
-                            mouseThrottle = now;
-                        }
-                    }
-                };
-                
-                const handleClick = (e) => {
-                    const rect = canvas.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    // 20% stronger when cursor is active
-                    addRipple(x, y, 2.4);
-                };
-                
-                const handleMouseLeave = () => {
-                    isCursorActive = false;
-                };
-                
-                canvas.addEventListener('mousemove', handleMouseMove);
-                canvas.addEventListener('click', handleClick);
-                canvas.addEventListener('mouseleave', handleMouseLeave);
-                
-                const animate = () => {
-                    // Water simulation
-                    for (let i = 1; i < resolution - 1; i++) {
-                        for (let j = 1; j < resolution - 1; j++) {
-                            const index = i * resolution + j;
-                            const top = previous[index - resolution];
-                            const bottom = previous[index + resolution];
-                            const left = previous[index - 1];
-                            const right = previous[index + 1];
-                            
-                            current[index] = (top + bottom + left + right) / 2 - current[index];
-                            current[index] *= 0.95; // damping
-                        }
-                    }
-                    
-                    [current, previous] = [previous, current];
-                    
-                    // Render
-                    ctx.fillStyle = '#000000';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    const cellWidth = canvas.width / resolution;
-                    const cellHeight = canvas.height / resolution;
-                    
-                    for (let i = 0; i < resolution; i++) {
-                        for (let j = 0; j < resolution; j++) {
-                            const index = i * resolution + j;
-                            const value = current[index];
-                            const intensity = Math.abs(value);
-                            
-                            if (intensity > 0.01) {
-                                const hue = 200;
-                                const lightness = Math.min(intensity * 100, 80);
-                                ctx.fillStyle = `hsl(${hue}, 100%, ${lightness}%)`;
-                                ctx.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
-                            }
-                        }
-                    }
-                    
-                    requestAnimationFrame(animate);
-                };
-                
-                animate();
-                
-                // Continuous automatic ripples - always active
-                const autoRippleInterval = setInterval(() => {
-                    const x = Math.random() * canvas.width;
-                    const y = Math.random() * canvas.height;
-                    
-                    // Base strength when cursor is not active (80% of full strength)
-                    let baseStrength = Math.random() * 1.2 + 0.4;
-                    
-                    // Check if cursor has been inactive for more than 2 seconds
-                    if (Date.now() - lastCursorTime > 2000) {
-                        isCursorActive = false;
-                    }
-                    
-                    // Apply 20% boost if cursor is active
-                    const finalStrength = isCursorActive ? baseStrength * 1.2 : baseStrength;
-                    
-                    addRipple(x, y, finalStrength);
-                }, 800); // Create ripples more frequently for continuous effect
-                
-                // Initial ripples
-                setTimeout(() => addRipple(canvas.width / 2, canvas.height / 3, 1.5), 500);
-                setTimeout(() => addRipple(canvas.width / 3, canvas.height / 2, 1.2), 800);
-                
-                return () => {
-                    canvas.removeEventListener('mousemove', handleMouseMove);
-                    canvas.removeEventListener('click', handleClick);
-                    canvas.removeEventListener('mouseleave', handleMouseLeave);
-                    clearInterval(autoRippleInterval);
-                };
-            }, []);
-            
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                console.log('Form submitted:', formData);
-                setSubmitted(true);
-                setTimeout(() => setSubmitted(false), 3000);
-            };
-            
-            const socialLinks = [
-                { name: "GitHub", url: "https://github.com", icon: "github" },
-                { name: "LinkedIn", url: "https://linkedin.com", icon: "linkedin" },
-                { name: "Twitter", url: "https://twitter.com", icon: "twitter" },
-                { name: "Email", url: "mailto:hello@example.com", icon: "mail" }
-            ];
-            
-            return (
-                <section id="contact" className="min-h-screen py-20 px-6 relative overflow-hidden" style={{ background: '#000000' }}>
-                    {/* Water Ripple Canvas Background */}
-                    <canvas 
-                        ref={canvasRef}
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            zIndex: 0,
-                            opacity: 0.3
-                        }}
-                    />
-                    
-                    <div className="max-w-4xl mx-auto relative z-10">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h2 className="apple-headline text-center mb-4" style={{ color: '#f5f5f7' }}>
-                                Get In Touch
-                            </h2>
-                            <p className="text-center apple-subheadline mb-16">
-                                Let's create something amazing together
-                            </p>
-                            
-                            <CardContainer className="w-full max-w-4xl mx-auto">
-                                <CardBody 
-                                    className="relative group/card w-full h-auto rounded-xl p-8 border border-cosmic-orange/30"
-                                    style={{ 
-                                        background: 'rgba(26, 26, 36, 0.6)',
-                                        backdropFilter: 'blur(20px)'
+                            {showName && (
+                                <motion.div 
+                                    className="intro-name-text"
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 1.2, ease: "easeOut" }}
+                                    style={{
+                                        fontFamily: fontLocked ? finalFont : fonts[currentFontIndex]
                                     }}
                                 >
-                                    <div className="grid md:grid-cols-2 gap-12">
-                                        <motion.div
-                                            initial={{ opacity: 0, x: -50 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.6 }}
-                                        >
-                                            <CardItem translateZ={50}>
-                                                <h3 className="text-2xl font-apple font-semibold mb-6 text-cosmic-orange" style={{ fontSize: '24px', fontWeight: 600, letterSpacing: '-0.01em' }}>
-                                                    Connect with me
-                                                </h3>
-                                            </CardItem>
-                                            <div className="space-y-4 mb-8">
-                                                {socialLinks.map((link, index) => (
-                                                    <CardItem 
-                                                        key={link.name} 
-                                                        translateZ={30 + (index * 10)}
-                                                        as="a"
-                                                        href={link.url}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="flex items-center gap-4 apple-link group block"
-                                                        style={{ color: '#f5f5f7' }}
-                                                    >
-                                                        <span className="font-medium apple-body">{link.name}</span>
-                                                    </CardItem>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                        
-                                        <motion.form
-                                            initial={{ opacity: 0, x: 50 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.6 }}
-                                            onSubmit={handleSubmit}
-                                            className="space-y-6"
-                                        >
-                                            <CardItem translateZ={40}>
-                                                <div>
-                                                    <label htmlFor="name" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
-                                                        Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        id="name"
-                                                        required
-                                                        value={formData.name}
-                                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                        className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
-                                                        style={{ color: '#f5f5f7' }}
-                                                        placeholder="Your name"
-                                                    />
-                                                </div>
-                                            </CardItem>
-                                            
-                                            <CardItem translateZ={40}>
-                                                <div>
-                                                    <label htmlFor="email" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
-                                                        Email
-                                                    </label>
-                                                    <input
-                                                        type="email"
-                                                        id="email"
-                                                        required
-                                                        value={formData.email}
-                                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                        className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
-                                                        style={{ color: '#f5f5f7' }}
-                                                        placeholder="your@email.com"
-                                                    />
-                                                </div>
-                                            </CardItem>
-                                            
-                                            <CardItem translateZ={40}>
-                                                <div>
-                                                    <label htmlFor="message" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
-                                                        Message
-                                                    </label>
-                                                    <textarea
-                                                        id="message"
-                                                        required
-                                                        rows={5}
-                                                        value={formData.message}
-                                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                                        className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all resize-none apple-body"
-                                                        style={{ color: '#f5f5f7' }}
-                                                        placeholder="Your message..."
-                                                    />
-                                                </div>
-                                            </CardItem>
-                                            
-                                            <CardItem translateZ={60}>
-                                                <GradientButton>
-                                                    {submitted ? '✓ Sent!' : 'Send Message'}
-                                                </GradientButton>
-                                            </CardItem>
-                                        </motion.form>
-                                    </div>
-                                </CardBody>
-                            </CardContainer>
+                                    Harshit
+                                </motion.div>
+                            )}
                         </motion.div>
-                    </div>
-                </section>
-            );
-        };
-        
-        // Infinite Carousel Section
-        const InfiniteCarousel = () => {
-            const images = [
-                "https://images.unsplash.com/photo-1758314896569-b3639ee707c4?q=80&w=715&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1671649240322-2124cd07eaae?q=80&w=627&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1673029925648-af80569efc46?q=80&w=687&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1666533099824-abd0ed813f2a?q=80&w=687&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1671105035554-7f8c2a587201?q=80&w=627&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1686750875748-d00684d36b1e?q=80&w=687&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1686844462591-393ceae12be0?q=80&w=764&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1686839181367-febb561faa53?q=80&w=687&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1671199850329-91cae34a6b6d?q=80&w=627&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1685655611311-9f801b43b9fa?q=80&w=627&auto=format&fit=crop",
-                "https://plus.unsplash.com/premium_photo-1675598468920-878ae1e46f14?q=80&w=764&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1718036094878-ecdce2b1be95?q=80&w=715&auto=format&fit=crop"
-            ];
-            
-            return (
-                <section className="loop-images">
-                    <div className="carousel-track" style={{ '--time': '60s', '--total': 12 }}>
-                        {images.map((img, index) => (
-                            <div key={index} className="carousel-item" style={{ '--i': index + 1 }}>
-                                <img src={img} alt={`carousel-${index + 1}`} />
-                            </div>
-                        ))}
-                    </div>
-                    <span className="scroll-down-indicator">
-                        Scroll down <span className="arrow">↓</span>
-                    </span>
-                </section>
-            );
-        };
-        
-        // 3D Rotating Image Section
-        const RotatingImage = () => {
-            const imageRef = useRef(null);
-            
-            useEffect(() => {
-                if (typeof gsap === 'undefined') return;
-                
-                gsap.set(imageRef.current, {
-                    transform: 'rotatex(90deg)',
-                });
-                
-                gsap.to(imageRef.current, {
-                    transform: 'rotatex(0deg)',
-                    scrollTrigger: {
-                        trigger: imageRef.current.parentElement,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true,
-                    },
-                });
-            }, []);
-            
-            return (
-                <section className="image-motion-section">
-                    <div className="image-motion" ref={imageRef}>
-                        <picture>
-                            <img src="https://i.postimg.cc/1ztkf4hX/moveimage.png" alt="3D Motion" />
-                        </picture>
-                    </div>
-                </section>
-            );
-        };
-        
-        // Color Spectrum Scroll Effect
-        const ColorSpectrum = () => {
-            const sectionRef = useRef(null);
-            const svgRef = useRef(null);
-            const textGridRef = useRef(null);
-            const mainTitleRef = useRef(null);
-            
-            useEffect(() => {
-                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-                    console.warn('GSAP or ScrollTrigger not loaded');
-                    return;
-                }
-                
-                gsap.registerPlugin(ScrollTrigger);
-                
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top bottom',
-                        end: 'bottom bottom',
-                        scrub: 1,
-                    }
-                });
-                
-                // Make containers visible
-                tl.to(svgRef.current, { autoAlpha: 1, duration: 0.01 }, 0)
-                  .to(textGridRef.current, { autoAlpha: 1, duration: 0.01 }, 0)
-                  .to(mainTitleRef.current, { autoAlpha: 1, duration: 0.01 }, 0)
-                  
-                  // Animate SVG rising
-                  .to(svgRef.current, {
-                      transform: 'scaleY(0.05) translateY(-30px)',
-                      duration: 0.3,
-                      ease: 'power2.out'
-                  }, 0)
-                  .to(svgRef.current, {
-                      transform: 'scaleY(1) translateY(0px)',
-                      duration: 1.2,
-                      ease: 'power2.out'
-                  }, 0.3)
-                  
-                  // Fade in labels and title
-                  .to('.spectrum-label', {
-                      duration: 0.8,
-                      y: 0,
-                      opacity: 1,
-                      stagger: 0.08,
-                      ease: 'power2.out'
-                  }, 0.9)
-                  .to('.spectrum-main-title', {
-                      opacity: 1,
-                      duration: 0.8,
-                      ease: 'power2.out'
-                  }, 0.9)
-                  
-                  // Animate levels
-                  .to('.level-5', { y: '-25vh', duration: 0.8, ease: 'power2.out' }, 0.9)
-                  .to('.level-4', { y: '-20vh', duration: 0.8, ease: 'power2.out' }, 0.9)
-                  .to('.level-3', { y: '-15vh', duration: 0.8, ease: 'power2.out' }, 0.9)
-                  .to('.level-2', { y: '-10vh', duration: 0.8, ease: 'power2.out' }, 0.9)
-                  .to('.level-1', { y: '-5vh', duration: 0.8, ease: 'power2.out' }, 0.9);
-                  
-                return () => {
-                    tl.kill();
-                };
-            }, []);
-            
-            return (
-                <section className="spectrum-scroll-section" ref={sectionRef}>
-                    <div className="spectrum-container">
-                        <div className="spectrum-svg-container" ref={svgRef}>
-                            <svg className="spectrum-svg" viewBox="0 0 1567 584" preserveAspectRatio="none" fill="none">
-                                <g clipPath="url(#clip)" filter="url(#blur)">
-                                    <path d="M1219 584H1393V184H1219V584Z" fill="url(#grad0)" />
-                                    <path d="M1045 584H1219V104H1045V584Z" fill="url(#grad1)" />
-                                    <path d="M348 584H174L174 184H348L348 584Z" fill="url(#grad2)" />
-                                    <path d="M522 584H348L348 104H522L522 584Z" fill="url(#grad3)" />
-                                    <path d="M697 584H522L522 54H697L697 584Z" fill="url(#grad4)" />
-                                    <path d="M870 584H1045V54H870V584Z" fill="url(#grad5)" />
-                                    <path d="M870 584H697L697 0H870L870 584Z" fill="url(#grad6)" />
-                                    <path d="M174 585H0.000183105L-3.75875e-06 295H174L174 585Z" fill="url(#grad7)" />
-                                    <path d="M1393 584H1567V294H1393V584Z" fill="url(#grad8)" />
-                                </g>
-                                <defs>
-                                    <filter id="blur" x="-30" y="-30" width="1627" height="644" filterUnits="userSpaceOnUse">
-                                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                                        <feGaussianBlur stdDeviation="15" result="effect1_foregroundBlur" />
-                                    </filter>
-                                    <linearGradient id="grad0" x1="1306" y1="584" x2="1306" y2="184" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad1" x1="1132" y1="584" x2="1132" y2="104" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad2" x1="261" y1="584" x2="261" y2="184" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad3" x1="435" y1="584" x2="435" y2="104" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad4" x1="609.501" y1="584" x2="609.501" y2="54" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad5" x1="957.5" y1="584" x2="957.5" y2="54" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad6" x1="783.501" y1="584" x2="783.501" y2="0" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad7" x1="87.0003" y1="585" x2="87.0003" y2="295" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad8" x1="1480" y1="584" x2="1480" y2="294" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#340B05" />
-                                        <stop offset="0.182709" stopColor="#0358F7" />
-                                        <stop offset="0.283673" stopColor="#5092C7" />
-                                        <stop offset="0.413484" stopColor="#E1ECFE" />
-                                        <stop offset="0.586565" stopColor="#FFD400" />
-                                        <stop offset="0.682722" stopColor="#FA3D1D" />
-                                        <stop offset="0.802892" stopColor="#FD02F5" />
-                                        <stop offset="1" stopColor="#FFC0FD" stopOpacity="0" />
-                                    </linearGradient>
-                                    <clipPath id="clip">
-                                        <rect width="1567" height="584" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
                         
-                        <div className="spectrum-main-title" ref={mainTitleRef}>
-                            Where Innovation Meets Design<br/>
-                            Across The Digital Spectrum
-                        </div>
-                        
-                        <div className="spectrum-text-grid" ref={textGridRef}>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-1">Machine<br/>Learning<br/>AI</div>
+                        {showChoices && (
+                            <div className="choice-container show">
+                                {console.log('RENDERING CARDS NOW')}
+                                <div
+                                    className="choice-card professional"
+                                    onClick={() => handleCardClick('professional')}
+                                >
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" 
+                                        alt="Professional Portfolio"
+                                    />
+                                    <div className="choice-overlay">
+                                        <div className="choice-label">Professional</div>
+                                        <div className="choice-subtitle">View Portfolio & Projects</div>
+                                    </div>
+                                </div>
+                                
+                                <div
+                                    className="choice-card personal"
+                                    onClick={() => handleCardClick('personal')}
+                                >
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80" 
+                                        alt="Personal Space"
+                                    />
+                                    <div className="choice-overlay">
+                                        <div className="choice-label">Personal</div>
+                                        <div className="choice-subtitle">Hobbies & Interests</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-2">Deep<br/>Learning<br/>Neural</div>
-                            </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-3">Computer<br/>Vision<br/>CV</div>
-                            </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-4">Natural<br/>Language<br/>NLP</div>
-                            </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-5">Generative<br/>Models<br/>Gen AI</div>
-                            </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-4">Data<br/>Science<br/>Analytics</div>
-                            </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-3">Web<br/>Development<br/>Full Stack</div>
-                            </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-2">UI/UX<br/>Design<br/>Creative</div>
-                            </div>
-                            <div className="spectrum-text-column">
-                                <div className="spectrum-label level-1">Cloud<br/>DevOps<br/>Tech</div>
-                            </div>
-                        </div>
+                        )}
                     </div>
-                </section>
+                </div>
             );
         };
         
-        // Main App Component - Ultra Lightweight
+        // Main App
         const App = () => {
-            // Disabled heavy smooth scroll for performance
-            React.useEffect(() => {
-                // Simple native smooth scroll - much lighter than Lenis
-                document.documentElement.style.scrollBehavior = 'smooth';
-                
-                return () => {
-                    document.documentElement.style.scrollBehavior = 'auto';
-                };
-            }, []);
-            
-            return (
-                <>
-                    <Starfield />
-                    <NavBar />
-                    <main>
-                        <Hero />
-                        <About />
-                        <Skills />
-                        <Experience />
-                        <Projects />
-                        <Blog />
-                        <Activity />
-                        <Contact />
-                    </main>
-                </>
-            );
+            return <IntroSequence />;
         };
         
         // Render the app
@@ -2931,4 +454,3 @@
     </script>
 </body>
 </html>
-    
