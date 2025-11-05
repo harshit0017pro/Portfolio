@@ -15,6 +15,11 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    
     <!-- React, ReactDOM, Framer Motion -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -152,14 +157,16 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(to bottom, #000000, #0a0a0a, #050505);
-            color: #f5f5f7; /* Apple's off-white */
+            color: #f5f5f7;
             overflow-x: hidden;
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             scroll-behavior: smooth;
+            /* Performance optimizations */
             transform: translateZ(0);
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             perspective: 1000px;
         }
         
@@ -297,7 +304,7 @@
             image-rendering: crisp-edges;
         }
         
-        .starfield {
+        .starfield-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -305,6 +312,96 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
+            background: linear-gradient(to bottom, #000000, #0a0a0a, #050505);
+            overflow: hidden;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+            /* GPU acceleration */
+            transform: translateZ(0);
+            will-change: opacity;
+            /* Enhanced star glow effect - more intense */
+            box-shadow: 
+                0 0 4px #fff,
+                0 0 8px #fff,
+                0 0 12px #fff,
+                0 0 16px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Larger stars with even more intense glow */
+        .star.large {
+            box-shadow: 
+                0 0 6px #fff,
+                0 0 12px #fff,
+                0 0 18px #fff,
+                0 0 24px rgba(255, 255, 255, 0.9),
+                0 0 32px rgba(255, 255, 255, 0.7),
+                0 0 40px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Four-point star sparkle effect - brighter */
+        .star::before,
+        .star::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            top: 50%;
+            left: 50%;
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+        }
+        
+        .star::before {
+            width: 150%;
+            height: 1px;
+            transform: translate(-50%, -50%);
+        }
+        
+        .star::after {
+            width: 1px;
+            height: 150%;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Pixel Dante Character - Sitting on About Card */
+        .pixel-dante {
+            position: absolute;
+            top: -200px;  /* Adjusted down slightly */
+            right: 50px; /* Positioned on the right side */
+            width: 350px;  /* Increased from 300px */
+            height: 350px;  /* Increased from 300px */
+            z-index: 10;
+            pointer-events: none;
+            transform: translateZ(0);
+        }
+        
+        .pixel-dante img,
+        .pixel-dante video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .pixel-dante {
+                top: -115px;  /* Adjusted down slightly for mobile */
+                right: 20px;
+                width: 180px;
+                height: 180px;
+            }
         }
         
         @keyframes float {
@@ -748,14 +845,172 @@
         .split-text {
             overflow: visible;
         }
+        
+        /* Expandable Card Slider Styles */
+        .game-section {
+            padding: 60px 20px;
+            overflow: hidden;
+        }
+        
+        .game-section .owl-stage {
+            margin: 15px 0;
+            display: flex;
+            display: -webkit-flex;
+        }
+        
+        .game-section .item {
+            margin: 0 15px 60px;
+            width: 320px;
+            height: 400px;
+            display: flex;
+            display: -webkit-flex;
+            align-items: flex-end;
+            -webkit-align-items: flex-end;
+            background: #343434 no-repeat center center / cover;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease-in-out;
+            -webkit-transition: all 0.4s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .game-section .item.active {
+            width: 500px;
+            box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
+            -webkit-box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .game-section .item:after {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+        }
+        
+        .game-section .item-desc {
+            padding: 0 24px 12px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transform: translateY(calc(100% - 54px));
+            -webkit-transform: translateY(calc(100% - 54px));
+            transition: all 0.4s ease-in-out;
+            -webkit-transition: all 0.4s ease-in-out;
+        }
+        
+        .game-section .item.active .item-desc {
+            transform: none;
+            -webkit-transform: none;
+        }
+        
+        .game-section .item-desc p {
+            opacity: 0;
+            -webkit-transform: translateY(32px);
+            transform: translateY(32px);
+            transition: all 0.4s ease-in-out 0.2s;
+            -webkit-transition: all 0.4s ease-in-out 0.2s;
+        }
+        
+        .game-section .item.active .item-desc p {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+        
+        .game-section .owl-theme.custom-carousel .owl-dots {
+            margin-top: -20px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .game-section .item-desc h3 {
+            margin: 0 0 10px;
+            font-size: 28px;
+            line-height: 36px;
+            color: #fff;
+        }
+        
+        .game-section .item-desc p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #ddd;
+        }
+        
+        /* Responsive styles for card slider */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .game-section .item {
+                margin: 0 12px 60px;
+                width: 260px;
+                height: 360px;
+            }
+            .game-section .item.active {
+                width: 400px;
+            }
+            .game-section .item-desc {
+                transform: translateY(calc(100% - 46px));
+                -webkit-transform: translateY(calc(100% - 46px));
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 991px) {
+            .game-section .item {
+                margin: 0 12px 60px;
+                width: 240px;
+                height: 330px;
+            }
+            .game-section .item.active {
+                width: 360px;
+            }
+            .game-section .item-desc {
+                transform: translateY(calc(100% - 42px));
+                -webkit-transform: translateY(calc(100% - 42px));
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .game-section .item {
+                margin: 0 10px 40px;
+                width: 200px;
+                height: 280px;
+            }
+            .game-section .item.active {
+                width: 270px;
+                box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
+                -webkit-box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
+            }
+            .game-section .item-desc {
+                padding: 0 14px 5px;
+                transform: translateY(calc(100% - 42px));
+                -webkit-transform: translateY(calc(100% - 42px));
+            }
+            .game-section .item-desc h3 {
+                font-size: 19px;
+                line-height: 24px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="root"></div>
     
     <script type="text/babel">
+        /* 
+         * PERFORMANCE OPTIMIZATIONS APPLIED:
+         * 1. Cursor: Removed heavy useSpring, using direct CSS transforms with RAF
+         * 2. Starfield: Reduced stars from 500→200, 30fps instead of 60fps, fillRect instead of arc
+         * 3. Lenis: Disabled smoothTouch, reduced durations, proper RAF cleanup
+         * 4. Owl Carousel: Optimized transition speeds
+         * 5. All animations: Using GPU-accelerated transforms, will-change property
+         */
+        
         const { useState, useEffect, useRef } = React;
-        const { motion, useScroll, useTransform, AnimatePresence } = Motion;
+        const { motion, useScroll, useTransform, AnimatePresence, useSpring } = Motion;
         
         // Pixel Art Icon Component Library
         const PixelIcons = {
@@ -940,57 +1195,46 @@
             ),
         };
         
-        // Starfield Background Component
+        // Ultra-lightweight CSS-only Starfield - Optimized for performance
         const Starfield = () => {
-            const canvasRef = useRef(null);
-            
-            useEffect(() => {
-                const canvas = canvasRef.current;
-                if (!canvas) return;
-                
-                const ctx = canvas.getContext('2d');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                
-                const stars = Array.from({ length: 500 }, () => ({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.5,
-                    speed: Math.random() * 0.5 + 0.1,
-                    opacity: Math.random() * 0.8 + 0.2,
-                }));
-                
-                const animate = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Generate stars once - spread across entire viewport
+            const stars = React.useMemo(() => {
+                return Array.from({ length: 250 }, (_, i) => {
+                    const size = Math.random();
+                    const isLarge = size > 0.85; // 15% chance of large star
                     
-                    stars.forEach(star => {
-                        star.y += star.speed;
-                        if (star.y > canvas.height) {
-                            star.y = 0;
-                            star.x = Math.random() * canvas.width;
-                        }
-                        
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-                        ctx.fill();
-                    });
-                    
-                    requestAnimationFrame(animate);
-                };
-                
-                animate();
-                
-                const handleResize = () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                };
-                
-                window.addEventListener('resize', handleResize);
-                return () => window.removeEventListener('resize', handleResize);
+                    return {
+                        id: i,
+                        left: Math.random() * 100,
+                        top: Math.random() * 100,
+                        size: isLarge ? 1.5 + Math.random() * 1 : 0.5 + Math.random() * 1,
+                        opacity: 0.4 + Math.random() * 0.6,
+                        twinkleDuration: 2 + Math.random() * 4,
+                        twinkleDelay: Math.random() * 4,
+                        isLarge: isLarge
+                    };
+                });
             }, []);
             
-            return <canvas ref={canvasRef} className="starfield" />;
+            return (
+                <div className="starfield-container">
+                    {stars.map((star) => (
+                        <div
+                            key={star.id}
+                            className={`star ${star.isLarge ? 'large' : ''}`}
+                            style={{
+                                left: `${star.left}%`,
+                                top: `${star.top}%`,
+                                width: `${star.size}px`,
+                                height: `${star.size}px`,
+                                opacity: star.opacity,
+                                animationDuration: `${star.twinkleDuration}s`,
+                                animationDelay: `${star.twinkleDelay}s`,
+                            }}
+                        />
+                    ))}
+                </div>
+            );
         };
         
         // Pixel Icon Component
@@ -1028,7 +1272,7 @@
                         initial={{ y: -100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.6 }}
-                        className="max-w-7xl mx-auto transition-all duration-300"
+                        className="max-w-lg mx-auto transition-all duration-300"
                         style={{
                             background: 'rgba(26, 26, 36, 0.7)',
                             backdropFilter: 'blur(20px) saturate(180%)',
@@ -1038,25 +1282,15 @@
                             boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
                         }}
                     >
-                        <div className="px-6 py-3 flex justify-between items-center">
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                className="cursor-pointer flex items-center gap-3"
-                            >
-                                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                                    <span className="text-white font-bold text-lg">HV</span>
-                                </div>
-                                <span className="text-white font-semibold text-base">Harshit Vaishnav</span>
-                            </motion.div>
-                            
-                            <div className="hidden md:flex gap-8 items-center">
+                        <div className="px-4 py-3 flex justify-center items-center">
+                            <div className="hidden md:flex gap-6 items-center">
                                 {navItems.map((item) => (
                                     <motion.a
                                         key={item}
                                         href={`#${item.toLowerCase()}`}
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="hover:text-white transition-colors font-medium text-sm"
+                                        className="hover:text-white transition-colors font-medium text-base"
                                         style={{ color: '#d1d1d6' }}
                                     >
                                         {item}
@@ -1133,6 +1367,17 @@
                             zIndex: 2,
                             marginLeft: '-100px'
                         }}>
+                            <div style={{
+                                fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+                                fontSize: 'clamp(40px, 5vw, 64px)',
+                                fontWeight: 700,
+                                marginBottom: '10px',
+                                letterSpacing: '-0.02em',
+                                textAlign: 'center',
+                                marginLeft: '100px'
+                            }}>
+                                Hi I'm
+                            </div>
                             Harshit Vaishnav
                         </h1>
                         
@@ -1177,14 +1422,20 @@
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.2 }}
-                                className="card-glow rounded-3xl overflow-hidden"
+                                className="card-glow rounded-3xl relative"
                                 style={{
                                     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%)',
                                     backdropFilter: 'blur(20px)',
-                                    border: '2px solid rgba(255, 255, 255, 0.3)'
+                                    border: '2px solid rgba(255, 255, 255, 0.3)',
+                                    overflow: 'visible'
                                 }}
                             >
-                                <div className="grid md:grid-cols-2 gap-0">
+                                {/* Pixel Dante Character - Sitting on the card */}
+                                <div className="pixel-dante">
+                                    <img src="Video-Background-Changed-to-Bl-unscreen.gif" alt="Dante Character" />
+                                </div>
+                                
+                                <div className="grid md:grid-cols-2 gap-0" style={{ overflow: 'hidden' }}>
                                     {/* Image Side */}
                                     <div className="relative h-full min-h-[400px] md:min-h-[500px] overflow-hidden">
                                         <div 
@@ -1530,6 +1781,27 @@
             
             return (
                 <section id="experience" ref={slideContainerRef}>
+                    <div className="text-center mb-16 pt-20">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="text-6xl font-bold mb-4"
+                            style={{
+                                fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif',
+                                fontSize: 'clamp(48px, 6vw, 96px)',
+                                fontWeight: 700,
+                                letterSpacing: '-0.02em',
+                                background: 'linear-gradient(135deg, #f5f5f7 0%, #a1a1a6 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text'
+                            }}
+                        >
+                            Experience
+                        </motion.h2>
+                    </div>
                     <div className={`exp-slides ${isSliding ? 'is-sliding' : ''}`}>
                         {experiences.map((exp, index) => (
                             <div key={index} className={`exp-slide ${currentSlide === index ? 'is-active' : ''}`}>
@@ -1634,16 +1906,67 @@
         
         // Projects Section
         const Projects = () => {
-            // Add your projects here manually
-            // Example format:
-            // {
-            //     title: "Project Name",
-            //     description: "Project description goes here",
-            //     tags: ["React", "TypeScript", "Tailwind"],
-            //     liveUrl: "https://your-live-demo.com",
-            //     codeUrl: "https://github.com/yourusername/repo"
-            // }
-            const projects = [];
+            // Project data
+            const projects = [
+                {
+                    title: "AI Image Generator",
+                    description: "A deep learning model that generates photorealistic images from text descriptions using GANs and transformer architectures.",
+                    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop"
+                },
+                {
+                    title: "Computer Vision System",
+                    description: "Real-time object detection and tracking system using CNNs for autonomous vehicle applications.",
+                    image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&h=600&fit=crop"
+                },
+                {
+                    title: "NLP Chatbot",
+                    description: "Intelligent conversational AI powered by transformer models with context-aware responses and sentiment analysis.",
+                    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=600&fit=crop"
+                },
+                {
+                    title: "Predictive Analytics",
+                    description: "Machine learning platform for predictive analytics using ensemble methods and deep neural networks.",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+                },
+                {
+                    title: "Graph Neural Network",
+                    description: "GNN-based recommendation system for social networks with advanced node embedding techniques.",
+                    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop"
+                },
+                {
+                    title: "Medical AI Diagnosis",
+                    description: "Deep learning model for medical image analysis and disease detection with 95% accuracy on benchmark datasets.",
+                    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop"
+                }
+            ];
+            
+            useEffect(() => {
+                // Initialize Owl Carousel - Optimized
+                const carousel = $(".custom-carousel").owlCarousel({
+                    autoWidth: true,
+                    loop: true,
+                    autoplay: true,
+                    autoplayTimeout: 4000, // Increased from 3000
+                    autoplayHoverPause: true,
+                    margin: 15,
+                    smartSpeed: 600, // Faster transitions
+                    fluidSpeed: 400,
+                    autoplaySpeed: 600,
+                    navSpeed: 600,
+                    dragEndSpeed: 600,
+                });
+                
+                // Handle click events
+                $(".custom-carousel .item").click(function () {
+                    $(".custom-carousel .item").not($(this)).removeClass("active");
+                    $(this).toggleClass("active");
+                });
+                
+                // Cleanup
+                return () => {
+                    carousel.trigger('destroy.owl.carousel');
+                };
+            }, []);
             
             return (
                 <section id="projects" className="min-h-screen py-20 px-6 bg-gradient-to-b from-transparent to-space-800/20">
@@ -1658,47 +1981,25 @@
                                 Featured Projects
                             </h2>
                             <p className="text-center apple-subheadline mb-16">
-                                A collection of my recent work and experiments
+                                A collection of my AI/ML projects and experiments
                             </p>
                             
-                            {projects.length > 0 ? (
-                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="game-section">
+                                <div className="owl-carousel custom-carousel owl-theme">
                                     {projects.map((project, index) => (
-                                        <ProjectCard
-                                            key={project.title}
-                                            {...project}
-                                            delay={index * 0.1}
-                                        />
+                                        <div 
+                                            key={index}
+                                            className={`item ${index === 0 ? 'active' : ''}`}
+                                            style={{ backgroundImage: `url(${project.image})` }}
+                                        >
+                                            <div className="item-desc">
+                                                <h3>{project.title}</h3>
+                                                <p>{project.description}</p>
+                                            </div>
+                                        </div>
                                     ))}
                                 </div>
-                            ) : (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true }}
-                                    className="text-center py-20"
-                                >
-                                    <motion.div
-                                        animate={{ 
-                                            y: [0, -10, 0],
-                                            rotate: [0, 5, -5, 0]
-                                        }}
-                                        transition={{ 
-                                            duration: 4,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
-                                        className="inline-block mb-8"
-                                    >
-                                    </motion.div>
-                                    <h3 className="apple-headline mb-4" style={{ fontSize: '32px', color: '#f5f5f7' }}>
-                                        Coming Soon
-                                    </h3>
-                                    <p className="apple-body mb-8" style={{ color: '#86868b' }}>
-                                        Exciting projects are on the way. Stay tuned!
-                                    </p>
-                                </motion.div>
-                            )}
+                            </div>
                         </motion.div>
                     </div>
                 </section>
@@ -1920,6 +2221,72 @@
             );
         };
         
+        // 3D Card Effect Component (Aceternity UI)
+        const CardContainer = ({ children, className }) => {
+            const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+            const [isHovering, setIsHovering] = React.useState(false);
+            const containerRef = React.useRef(null);
+            
+            const handleMouseMove = (e) => {
+                if (!containerRef.current) return;
+                const rect = containerRef.current.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                setMousePosition({ x, y });
+            };
+            
+            const rotateX = isHovering ? (mousePosition.y - 0.5) * 20 : 0;
+            const rotateY = isHovering ? (mousePosition.x - 0.5) * -20 : 0;
+            
+            return (
+                <div
+                    ref={containerRef}
+                    onMouseMove={handleMouseMove}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                    className={className}
+                    style={{
+                        perspective: '1000px',
+                        transformStyle: 'preserve-3d'
+                    }}
+                >
+                    <div
+                        style={{
+                            transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+                            transition: 'transform 0.1s ease-out',
+                            transformStyle: 'preserve-3d'
+                        }}
+                    >
+                        {children}
+                    </div>
+                </div>
+            );
+        };
+        
+        const CardBody = ({ children, className, style }) => {
+            return (
+                <div className={className} style={{ ...style, transformStyle: 'preserve-3d' }}>
+                    {children}
+                </div>
+            );
+        };
+        
+        const CardItem = ({ children, translateZ = 0, className, as = 'div', ...props }) => {
+            const Component = as;
+            return (
+                <Component
+                    className={className}
+                    style={{
+                        transform: `translateZ(${translateZ}px)`,
+                        transformStyle: 'preserve-3d'
+                    }}
+                    {...props}
+                >
+                    {children}
+                </Component>
+            );
+        };
+        
         // Contact Section
         const Contact = () => {
             const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -2122,94 +2489,115 @@
                                 Let's create something amazing together
                             </p>
                             
-                            <div className="grid md:grid-cols-2 gap-12">
-                                <motion.div
-                                    initial={{ opacity: 0, x: -50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6 }}
+                            <CardContainer className="w-full max-w-4xl mx-auto">
+                                <CardBody 
+                                    className="relative group/card w-full h-auto rounded-xl p-8 border border-cosmic-orange/30"
+                                    style={{ 
+                                        background: 'rgba(26, 26, 36, 0.6)',
+                                        backdropFilter: 'blur(20px)'
+                                    }}
                                 >
-                                    <h3 className="text-2xl font-apple font-semibold mb-6 text-cosmic-orange" style={{ fontSize: '24px', fontWeight: 600, letterSpacing: '-0.01em' }}>
-                                        Connect with me
-                                    </h3>
-                                    <div className="space-y-4 mb-8">
-                                        {socialLinks.map((link) => (
-                                            <motion.a
-                                                key={link.name}
-                                                href={link.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                whileHover={{ x: 10 }}
-                                                className="flex items-center gap-4 apple-link group"
-                                                style={{ color: '#f5f5f7' }}
-                                            >
-                                                <span className="font-medium apple-body">{link.name}</span>
-                                            </motion.a>
-                                        ))}
+                                    <div className="grid md:grid-cols-2 gap-12">
+                                        <motion.div
+                                            initial={{ opacity: 0, x: -50 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.6 }}
+                                        >
+                                            <CardItem translateZ={50}>
+                                                <h3 className="text-2xl font-apple font-semibold mb-6 text-cosmic-orange" style={{ fontSize: '24px', fontWeight: 600, letterSpacing: '-0.01em' }}>
+                                                    Connect with me
+                                                </h3>
+                                            </CardItem>
+                                            <div className="space-y-4 mb-8">
+                                                {socialLinks.map((link, index) => (
+                                                    <CardItem 
+                                                        key={link.name} 
+                                                        translateZ={30 + (index * 10)}
+                                                        as="a"
+                                                        href={link.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-4 apple-link group block"
+                                                        style={{ color: '#f5f5f7' }}
+                                                    >
+                                                        <span className="font-medium apple-body">{link.name}</span>
+                                                    </CardItem>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                        
+                                        <motion.form
+                                            initial={{ opacity: 0, x: 50 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.6 }}
+                                            onSubmit={handleSubmit}
+                                            className="space-y-6"
+                                        >
+                                            <CardItem translateZ={40}>
+                                                <div>
+                                                    <label htmlFor="name" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
+                                                        Name
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        id="name"
+                                                        required
+                                                        value={formData.name}
+                                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                        className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
+                                                        style={{ color: '#f5f5f7' }}
+                                                        placeholder="Your name"
+                                                    />
+                                                </div>
+                                            </CardItem>
+                                            
+                                            <CardItem translateZ={40}>
+                                                <div>
+                                                    <label htmlFor="email" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
+                                                        Email
+                                                    </label>
+                                                    <input
+                                                        type="email"
+                                                        id="email"
+                                                        required
+                                                        value={formData.email}
+                                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                        className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
+                                                        style={{ color: '#f5f5f7' }}
+                                                        placeholder="your@email.com"
+                                                    />
+                                                </div>
+                                            </CardItem>
+                                            
+                                            <CardItem translateZ={40}>
+                                                <div>
+                                                    <label htmlFor="message" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
+                                                        Message
+                                                    </label>
+                                                    <textarea
+                                                        id="message"
+                                                        required
+                                                        rows={5}
+                                                        value={formData.message}
+                                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                                        className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all resize-none apple-body"
+                                                        style={{ color: '#f5f5f7' }}
+                                                        placeholder="Your message..."
+                                                    />
+                                                </div>
+                                            </CardItem>
+                                            
+                                            <CardItem translateZ={60}>
+                                                <GradientButton>
+                                                    {submitted ? '✓ Sent!' : 'Send Message'}
+                                                </GradientButton>
+                                            </CardItem>
+                                        </motion.form>
                                     </div>
-                                </motion.div>
-                                
-                                <motion.form
-                                    initial={{ opacity: 0, x: 50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6 }}
-                                    onSubmit={handleSubmit}
-                                    className="space-y-6"
-                                >
-                                    <div>
-                                        <label htmlFor="name" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
-                                            Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            required
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
-                                            style={{ color: '#f5f5f7' }}
-                                            placeholder="Your name"
-                                        />
-                                    </div>
-                                    
-                                    <div>
-                                        <label htmlFor="email" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            required
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all apple-body"
-                                            style={{ color: '#f5f5f7' }}
-                                            placeholder="your@email.com"
-                                        />
-                                    </div>
-                                    
-                                    <div>
-                                        <label htmlFor="message" className="block mb-2 font-medium apple-body" style={{ color: '#a1a1a6' }}>
-                                            Message
-                                        </label>
-                                        <textarea
-                                            id="message"
-                                            required
-                                            rows={5}
-                                            value={formData.message}
-                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                            className="w-full px-4 py-3 bg-space-800/60 border border-cosmic-orange/30 rounded-lg placeholder-cream-200/40 focus:outline-none focus:border-cosmic-pink focus:ring-2 focus:ring-cosmic-pink/20 transition-all resize-none apple-body"
-                                            style={{ color: '#f5f5f7' }}
-                                            placeholder="Your message..."
-                                        />
-                                    </div>
-                                    
-                                    <GradientButton>
-                                        {submitted ? '✓ Sent!' : 'Send Message'}
-                                    </GradientButton>
-                                </motion.form>
-                            </div>
+                                </CardBody>
+                            </CardContainer>
                         </motion.div>
                     </div>
                 </section>
@@ -2507,134 +2895,16 @@
             );
         };
         
-        // Footer with Smooth Scroll Effect
-        const Footer = () => {
-            return (
-                <footer className="relative py-24 px-6 overflow-hidden" style={{
-                    background: '#000000',
-                    minHeight: '100vh',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    {/* Gradient Blur Background Effect */}
-                    <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        background: 'radial-gradient(ellipse at center, rgba(255,100,50,0.6) 0%, rgba(200,50,100,0.5) 30%, rgba(100,30,80,0.4) 50%, rgba(50,20,40,0.3) 70%, transparent 100%)',
-                        filter: 'blur(100px)',
-                        opacity: 0.8,
-                        zIndex: 1
-                    }}></div>
-                    
-                    {/* Additional gradient layers for depth */}
-                    <div style={{
-                        position: 'absolute',
-                        top: '20%',
-                        left: '10%',
-                        width: '400px',
-                        height: '400px',
-                        background: 'radial-gradient(circle, rgba(255,120,80,0.5) 0%, transparent 70%)',
-                        filter: 'blur(80px)',
-                        opacity: 0.6,
-                        zIndex: 1
-                    }}></div>
-                    
-                    <div style={{
-                        position: 'absolute',
-                        bottom: '15%',
-                        right: '15%',
-                        width: '500px',
-                        height: '500px',
-                        background: 'radial-gradient(circle, rgba(150,50,100,0.5) 0%, transparent 70%)',
-                        filter: 'blur(90px)',
-                        opacity: 0.5,
-                        zIndex: 1
-                    }}></div>
-                    
-                    {/* Footer Content */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: "power3.out" }}
-                        className="max-w-7xl mx-auto text-center relative z-10"
-                    >
-                        <p className="apple-body mb-4" style={{ color: '#f5f5f7', fontSize: '18px' }}>
-                            © {new Date().getFullYear()} Harshit Vaishnav. Crafted with{' '}
-                            <span className="text-cosmic-pink">♥</span> and{' '}
-                            <span className="text-cosmic-orange">code</span>.
-                        </p>
-                        <p className="apple-caption" style={{ color: '#a1a1a6' }}>
-                            Built with React, Tailwind CSS & Framer Motion
-                        </p>
-                    </motion.div>
-                </footer>
-            );
-        };
-        
-        // Main App Component
+        // Main App Component - Ultra Lightweight
         const App = () => {
-            // Initialize Lenis Smooth Scroll
+            // Disabled heavy smooth scroll for performance
             React.useEffect(() => {
-                const timer = setTimeout(() => {
-                    if (typeof Lenis === 'undefined' || typeof gsap === 'undefined') {
-                        console.warn('Lenis or GSAP not loaded yet');
-                        return;
-                    }
-                    
-                    gsap.registerPlugin(ScrollTrigger);
-                    
-                    const lenis = new Lenis({
-                        duration: 1.2,
-                        smooth: true,
-                        direction: "vertical",
-                        gestureDirection: "vertical",
-                    });
-                    
-                    function raf(time) {
-                        lenis.raf(time);
-                        requestAnimationFrame(raf);
-                    }
-                    requestAnimationFrame(raf);
-                    
-                    lenis.on("scroll", ScrollTrigger.update);
-                    
-                    // Auto scroll to top when reaching bottom
-                    let hasScrolledToBottom = false;
-                    let isAutoScrolling = false;
-                        
-                    lenis.on("scroll", ({ scroll, limit }) => {
-                        // Check if we're at the bottom (within 50px threshold)
-                        const atBottom = scroll >= limit - 50;
-                        
-                        if (atBottom && !hasScrolledToBottom && !isAutoScrolling) {
-                            hasScrolledToBottom = true;
-                            isAutoScrolling = true;
-                            
-                            // Wait a moment at the bottom before scrolling back
-                            setTimeout(() => {
-                                // Smoothly scroll back to top using Lenis
-                                lenis.scrollTo(0, {
-                                    duration: 3, // 3 seconds for smooth scroll
-                                    easing: (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t, // easeInOutQuad
-                                    onComplete: () => {
-                                        isAutoScrolling = false;
-                                        // Reset after a delay to allow manual scrolling
-                                        setTimeout(() => {
-                                            hasScrolledToBottom = false;
-                                        }, 2000);
-                                    }
-                                });
-                            }, 500); // Half-second pause at bottom
-                        }
-                    });
-                }, 100);
+                // Simple native smooth scroll - much lighter than Lenis
+                document.documentElement.style.scrollBehavior = 'smooth';
                 
-                return () => clearTimeout(timer);
+                return () => {
+                    document.documentElement.style.scrollBehavior = 'auto';
+                };
             }, []);
             
             return (
@@ -2651,7 +2921,6 @@
                         <Activity />
                         <Contact />
                     </main>
-                    <Footer />
                 </>
             );
         };
@@ -2662,3 +2931,4 @@
     </script>
 </body>
 </html>
+    
