@@ -176,9 +176,10 @@
         }
         
         .intro-skip-button {
-            position: absolute;
+            position: fixed;
             top: 2rem;
-            right: 2rem;
+            right: 6rem;
+            z-index: 100001;
             padding: 0.75rem 1.5rem;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -688,6 +689,7 @@
             const [showChoices, setShowChoices] = useState(false);
             const [showPixelChars, setShowPixelChars] = useState(false);
             const [introStarted, setIntroStarted] = useState(false);
+            const [isSkipped, setIsSkipped] = useState(false);
             
             const handsSceneRef = useRef(null);
             const leftHandRef = useRef(null);
@@ -845,6 +847,9 @@
                 
                 // Play coin sound with 0.1 second delay when hands appear
                 setTimeout(() => {
+                    // Don't play coin sound if intro was skipped
+                    if (isSkipped) return;
+                    
                     console.log('Playing coin sound with hands animation');
                     if (coinSoundRef.current) {
                         coinSoundRef.current.volume = isMuted ? 0 : 0.3; // Reduced from 0.5
@@ -903,16 +908,51 @@
             
             const handleCardClick = (type) => {
                 if (type === 'professional') {
-                    // Redirect to main portfolio
+                    // Redirect to main portfolio (current portfolio.html)
                     window.location.href = 'portfolio.html';
                 } else {
-                    // Redirect to personal page (for now, go to portfolio about section)
-                    window.location.href = 'portfolio.html#about';
+                    // Redirect to personal page (new personal page)
+                    window.location.href = 'personal.html';
                 }
             };
             
             const handleSkip = () => {
-                window.location.href = 'portfolio.html';
+                // Set skip flag to prevent coin sound
+                setIsSkipped(true);
+                
+                // Skip directly to card selection
+                // Stop typing and coin sounds only
+                if (typingSoundRef.current) {
+                    typingSoundRef.current.pause();
+                    typingSoundRef.current.currentTime = 0;
+                }
+                if (coinSoundRef.current) {
+                    coinSoundRef.current.pause();
+                    coinSoundRef.current.currentTime = 0;
+                }
+                
+                // Start forest sound if not already playing
+                if (forestSoundRef.current && forestSoundRef.current.paused) {
+                    forestSoundRef.current.volume = isMuted ? 0 : 0.15;
+                    forestSoundRef.current.currentTime = 0;
+                    forestSoundRef.current.play()
+                        .then(() => console.log('Forest sound playing after skip'))
+                        .catch(err => console.error('Forest sound error on skip:', err));
+                }
+                
+                // Hide all intro elements
+                setHideIntroText(true);
+                setShowHands(false);
+                
+                // Hide hands scene immediately
+                if (handsSceneRef.current) {
+                    handsSceneRef.current.style.opacity = '0';
+                    handsSceneRef.current.style.display = 'none';
+                }
+                
+                // Show cards immediately
+                setShowChoices(true);
+                setShowPixelChars(true);
             };
             
             const toggleMute = () => {
@@ -936,7 +976,28 @@
             return (
                 <>
                     {/* Mute/Unmute Button */}
-                    {introStarted && (
+                    {introStarted && !showChoices && (
+                        <>
+                            <button 
+                                className="mute-button" 
+                                onClick={toggleMute}
+                                aria-label={isMuted ? "Unmute" : "Mute"}
+                            >
+                                {isMuted ? '🔇' : '🔊'}
+                            </button>
+                            
+                            {/* Skip Intro Button */}
+                            <button 
+                                className="intro-skip-button"
+                                onClick={handleSkip}
+                            >
+                                Skip Intro →
+                            </button>
+                        </>
+                    )}
+                    
+                    {/* Mute button only (no skip) when cards are showing */}
+                    {introStarted && showChoices && (
                         <button 
                             className="mute-button" 
                             onClick={toggleMute}
